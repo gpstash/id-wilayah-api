@@ -72,7 +72,6 @@
       <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— List all cities/regencies in a province</span></li>
       <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— List all districts in a city/regency</span></li>
       <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— List all villages in a district</span></li>
-      <li class="endpoint"><span class="method">GET</span> <code>/health</code> <span style="color:#666">— Health check</span></li>
     </ul>
 
     <div class="howto">
@@ -102,14 +101,11 @@
       <form class="test-form" id="api-tester">
         <label for="endpoint">Endpoint</label>
         <select id="endpoint" name="endpoint">
-          <option value="/states">/states</option>
-          <option value="/states/11/cities">/states/:stateCode/cities</option>
-          <option value="/cities/1101/districts">/cities/:cityCode/districts</option>
-          <option value="/districts/1101010/villages">/districts/:districtCode/villages</option>
-          <option value="/health">/health</option>
+          <option value="states">/states</option>
+          <option value="cities">/states/31/cities</option>
+          <option value="districts">/cities/31.74/districts</option>
+          <option value="villages">/districts/31.74.04/villages</option>
         </select>
-        <label for="base-url">Base URL</label>
-        <input id="base-url" name="base-url" type="text" placeholder="https://id-wilayah-api.gilangpratama.id" required value="https://id-wilayah-api.gilangpratama.id" />
         <button type="submit">Send Request</button>
       </form>
       <div id="response" class="response-box" style="display:none"></div>
@@ -118,13 +114,19 @@
   <script>
     const form = document.getElementById('api-tester');
     const responseBox = document.getElementById('response');
+    const endpoints = {
+      'states': '/states',
+      'cities': '/states/31/cities',
+      'districts': '/cities/31.74/districts',
+      'villages': '/districts/31.74.04/villages'
+    }
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       responseBox.style.display = 'none';
       responseBox.textContent = '';
-      const baseUrl = form['base-url'].value.replace(/\/$/, '');
+      const baseUrl = 'https://id-wilayah-api.gilangpratama.id';
       const endpoint = form['endpoint'].value;
-      let url = baseUrl + endpoint;
+      const url = baseUrl + endpoints[endpoint];
       responseBox.textContent = 'Loading...';
       responseBox.style.display = 'block';
       try {
