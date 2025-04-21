@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import addressTree from './data/base.json';
 import { createRoutes } from './routes';
 import { AddressService } from './services/AddressService';
-import type { ErrorResponse } from './types';
+import { applyGlobalHandlers } from './utils/appHandlers';
 import { validateAddressData } from './utils/validation';
 
 // ==================== DATA VALIDATION ====================
@@ -23,28 +23,8 @@ const app = new Hono<{ Bindings: CloudflareBindings }>();
 
 // ==================== ERROR HANDLING ====================
 
-// Global error handler
-app.onError((err, c) => {
-  console.error(`Error: ${err.message}`);
-  const errorResponse: ErrorResponse = {
-    error: 'Internal server error',
-    status: 500,
-    timestamp: new Date().toISOString(),
-    path: c.req.path,
-  };
-  return c.json(errorResponse, 500);
-});
-
-// Not found handler
-app.notFound((c) => {
-  const errorResponse: ErrorResponse = {
-    error: 'Resource not found',
-    status: 404,
-    timestamp: new Date().toISOString(),
-    path: c.req.path,
-  };
-  return c.json(errorResponse, 404);
-});
+// Attach global error and not found handlers
+applyGlobalHandlers(app);
 
 // ==================== REGISTER ROUTES ====================
 
