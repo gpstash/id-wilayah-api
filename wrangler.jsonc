@@ -7,10 +7,6 @@
 	"name": "address-service-hono-cfw",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-04-20",
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./public"
-	},
 	"observability": {
 		"enabled": true
 	}
