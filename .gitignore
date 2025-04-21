@@ -34,6 +34,3 @@ lerna-debug.log*
 
 # coverage
 coverage/
-
-# raw
-raw/base.json
