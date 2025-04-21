@@ -4,7 +4,7 @@
 
 ## Description
 
-A simple and modern API for accessing Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages. Built with Hono and designed for easy integration, this service makes it a breeze to fetch and validate Indonesian address data in your apps. Perfect for anyone needing up-to-date, structured wilayah info—whether you're building forms, dashboards, or address validation tools.
+A simple API for accessing Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages. Built with Hono and designed for easy integration, this service makes it a breeze to fetch and validate Indonesian address data in your apps. Perfect for anyone needing up-to-date, structured wilayah info—whether you're building forms, dashboards, or address validation tools.
 
 ## Data Structure
 
