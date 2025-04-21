@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ID Wilayah API – Documentation & Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0061f2;
+      --bg: #f8fafc;
+      --white: #fff;
+      --gray: #e5e7eb;
+      --text: #22292f;
+      --code-bg: #f3f4f6;
+      --radius: 12px;
+      --shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+    }
+    html, body {
+      margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 17px;
+    }
+    .container {
+      max-width: 800px; margin: 48px auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 40px 32px 32px 32px;
+    }
+    h1, h2, h3 { margin-top: 0; font-weight: 600; }
+    h1 { font-size: 2.3rem; letter-spacing: -1px; }
+    h2 { margin-top: 2.5rem; font-size: 1.3rem; border-left: 4px solid var(--primary); padding-left: 0.7em; }
+    .badge { display: inline-block; background: var(--primary); color: var(--white); border-radius: 20px; padding: 2px 14px; font-size: 0.95em; margin-bottom: 18px; letter-spacing: 0.5px; }
+    .desc { color: #4b5563; margin-bottom: 1.5em; }
+    .endpoint-list { list-style: none; padding: 0; }
+    .endpoint { margin-bottom: 1.2em; }
+    .endpoint .method { font-weight: 600; color: var(--primary); margin-right: 8px; }
+    code, pre { background: var(--code-bg); border-radius: 6px; font-size: 0.97em; }
+    code { padding: 2px 7px; }
+    pre { padding: 15px 18px; overflow-x: auto; }
+    .howto, .example, .test { margin-bottom: 2.5em; }
+    .test-form { background: var(--code-bg); border-radius: 8px; padding: 18px 18px 12px 18px; margin-top: 1em; }
+    .test-form label { display: block; margin-bottom: 0.5em; font-weight: 500; }
+    .test-form input, .test-form select {
+      width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--gray); margin-bottom: 1.2em; font-size: 1em;
+    }
+    .test-form button {
+      background: var(--primary); color: var(--white); border: none; border-radius: 6px; padding: 8px 18px; font-size: 1em; font-weight: 600; cursor: pointer;
+      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.03);
+      transition: background 0.15s;
+    }
+    .test-form button:hover { background: #004bb5; }
+    .response-box {
+      margin-top: 1.3em; background: var(--white); border: 1px solid var(--gray); border-radius: 7px; padding: 12px 15px; font-size: 0.98em; color: #0b3a2f;
+      font-family: 'Fira Mono', 'Consolas', monospace; white-space: pre-wrap; word-break: break-all;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 16px 2vw; }
+      pre { padding: 10px 5vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">ID Wilayah API</span>
+    <h1>API Documentation & Playground</h1>
+    <div class="desc">
+      A simple, modern API for Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages.<br>
+      Built for developers who need up-to-date, structured wilayah info for forms, dashboards, or address validation.
+    </div>
+
+    <h2>Available Endpoints</h2>
+    <ul class="endpoint-list">
+      <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— List all provinces (states)</span></li>
+      <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— List all cities/regencies in a province</span></li>
+      <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— List all districts in a city/regency</span></li>
+      <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— List all villages in a district</span></li>
+      <li class="endpoint"><span class="method">GET</span> <code>/health</code> <span style="color:#666">— Health check</span></li>
+    </ul>
+
+    <div class="howto">
+      <h2>How to Use</h2>
+      <p>Simply send a <b>GET</b> request to the desired endpoint. Example using <code>curl</code>:</p>
+      <pre>curl https://YOUR_API_DOMAIN/states</pre>
+      <p>Or from JavaScript:</p>
+      <pre>fetch('https://YOUR_API_DOMAIN/states')
+  .then(r =&gt; r.json())
+  .then(console.log);</pre>
+    </div>
+
+    <div class="example">
+      <h2>Example Response</h2>
+      <pre>{
+  "data": [
+    { "code": "11", "value": "Aceh" },
+    { "code": "12", "value": "Sumatera Utara" },
+    { "code": "13", "value": "Sumatera Barat" },
+    ...
+  ]
+}</pre>
+    </div>
+
+    <div class="test">
+      <h2>Test an Endpoint</h2>
+      <form class="test-form" id="api-tester">
+        <label for="endpoint">Endpoint</label>
+        <select id="endpoint" name="endpoint">
+          <option value="/states">/states</option>
+          <option value="/states/11/cities">/states/:stateCode/cities</option>
+          <option value="/cities/1101/districts">/cities/:cityCode/districts</option>
+          <option value="/districts/1101010/villages">/districts/:districtCode/villages</option>
+          <option value="/health">/health</option>
+        </select>
+        <label for="base-url">Base URL</label>
+        <input id="base-url" name="base-url" type="text" placeholder="https://YOUR_API_DOMAIN" required value="https://YOUR_API_DOMAIN" />
+        <button type="submit">Send Request</button>
+      </form>
+      <div id="response" class="response-box" style="display:none"></div>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('api-tester');
+    const responseBox = document.getElementById('response');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      responseBox.style.display = 'none';
+      responseBox.textContent = '';
+      const baseUrl = form['base-url'].value.replace(/\/$/, '');
+      const endpoint = form['endpoint'].value;
+      let url = baseUrl + endpoint;
+      responseBox.textContent = 'Loading...';
+      responseBox.style.display = 'block';
+      try {
+        const res = await fetch(url);
+        const text = await res.text();
+        try {
+          responseBox.textContent = JSON.stringify(JSON.parse(text), null, 2);
+        } catch {
+          responseBox.textContent = text;
+        }
+      } catch (err) {
+        responseBox.textContent = 'Request failed: ' + err;
+      }
+    });
+  </script>
+</body>
+</html>
