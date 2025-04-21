@@ -3,14 +3,31 @@
 	"scripts": {
 		"dev": "wrangler dev",
 		"deploy": "wrangler deploy --minify",
-		"cf-typegen": "wrangler types --env-interface CloudflareBindings"
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"prepare": "husky",
+		"test": "vitest"
 	},
 	"dependencies": {
 		"hono": "^4.7.7"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20250420.0",
+		"@hono/eslint-config": "^2.0.0",
+		"eslint": "^9.25.0",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.5.1",
+		"prettier": "^3.5.3",
+		"vitest": "^3.1.1",
 		"wrangler": "^4.12.0"
 	},
-	"packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
+	"lint-staged": {
+		"*.{js,ts}": [
+			"eslint --fix"
+		]
+	},
+	"packageManager": "pnpm@10.8.0"
 }
