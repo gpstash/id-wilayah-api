@@ -18,7 +18,6 @@ export class AddressService {
     return Object.entries(this.tree).map(([code, state]) => ({
       code,
       value: state.value,
-      type: state.type,
     }));
   }
   
@@ -39,7 +38,6 @@ export class AddressService {
     return Object.entries(state.children).map(([code, city]) => ({
       code,
       value: city.value,
-      type: city.type,
     }));
   }
   
@@ -68,7 +66,6 @@ export class AddressService {
     return Object.entries(result.city.children).map(([code, district]) => ({
       code,
       value: district.value,
-      type: district.type,
     }));
   }
   
@@ -101,7 +98,6 @@ export class AddressService {
     return Object.entries(result.district.children).map(([code, village]) => ({
       code,
       value: village.value,
-      type: village.type,
     }));
   }
 }

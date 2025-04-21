@@ -6,19 +6,15 @@ import { AddressService } from './AddressService';
 const mockData: Record<string, AddressNode> = {
   '31': {
     value: 'DKI Jakarta',
-    type: 'State',
     children: {
       '31.74': {
         value: 'Jakarta Selatan',
-        type: 'City',
         children: {
           '31.74.04': {
             value: 'Kebayoran Baru',
-            type: 'District',
             children: {
               '31.74.04.1001': {
                 value: 'Gandaria Utara',
-                type: 'Village',
               },
             },
           },
@@ -38,7 +34,7 @@ describe('AddressService', () => {
   it('getAllStates returns all states', () => {
     const states = service.getAllStates();
     expect(states).toEqual([
-      { code: '31', value: 'DKI Jakarta', type: 'State' },
+      { code: '31', value: 'DKI Jakarta' },
     ]);
   });
 
@@ -50,7 +46,7 @@ describe('AddressService', () => {
   it('getCitiesInState returns all cities in a state', () => {
     const cities = service.getCitiesInState('31');
     expect(cities).toEqual([
-      { code: '31.74', value: 'Jakarta Selatan', type: 'City' },
+      { code: '31.74', value: 'Jakarta Selatan' },
     ]);
     expect(service.getCitiesInState('32')).toBeNull();
   });
@@ -66,7 +62,7 @@ describe('AddressService', () => {
   it('getDistrictsInCity returns all districts in a city', () => {
     const districts = service.getDistrictsInCity('31.74');
     expect(districts).toEqual([
-      { code: '31.74.04', value: 'Kebayoran Baru', type: 'District' },
+      { code: '31.74.04', value: 'Kebayoran Baru' },
     ]);
     expect(service.getDistrictsInCity('99.99')).toBeNull();
   });
@@ -83,7 +79,7 @@ describe('AddressService', () => {
   it('getVillagesInDistrict returns all villages in a district', () => {
     const villages = service.getVillagesInDistrict('31.74.04');
     expect(villages).toEqual([
-      { code: '31.74.04.1001', value: 'Gandaria Utara', type: 'Village' },
+      { code: '31.74.04.1001', value: 'Gandaria Utara' },
     ]);
     expect(service.getVillagesInDistrict('00.00.00')).toBeNull();
   });
