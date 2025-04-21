@@ -3,7 +3,6 @@
  */
 export interface AddressNode {
   value: string;
-  type: 'STATE' | 'CITY' | 'DISTRICT' | 'VILLAGE';
   children?: Record<string, AddressNode>;
 }
 
@@ -13,7 +12,6 @@ export interface AddressNode {
 export interface AddressResponse {
   code: string;
   value: string;
-  type: string;
 }
 
 /**

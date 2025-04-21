@@ -6,7 +6,6 @@ import type { AddressNode } from '../types';
  */
 export const AddressNodeSchema: z.ZodType<AddressNode> = z.lazy(() => z.object({
   value: z.string(),
-  type: z.enum(['STATE', 'CITY', 'DISTRICT', 'VILLAGE']),
   children: z.record(z.lazy(() => AddressNodeSchema)).optional(),
 }));
 

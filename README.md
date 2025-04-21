@@ -6,6 +6,12 @@
 
 A simple and modern API for accessing Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages. Built with Hono and designed for easy integration, this service makes it a breeze to fetch and validate Indonesian address data in your apps. Perfect for anyone needing up-to-date, structured wilayah info—whether you're building forms, dashboards, or address validation tools.
 
+## Data Structure
+
+- The address data files (`states.json`, `cities/*.json`, `districts/*.json`, `villages/*.json`) only include `code` and `value` for each state, city, district, and village.
+- This change reduces data size and improves API response performance.
+- All API responses, validation logic, and tests use only `code` and `value`.
+
 ## Available Endpoints
 
 - `GET /states` — List all provinces (states)
@@ -35,6 +41,17 @@ A simple and modern API for accessing Indonesian wilayah (administrative region)
 ```sh
 pnpm install
 ```
+
+### Prepare Data (Scripts)
+
+To generate the up-to-date JSON data files from the raw source, run:
+
+```sh
+bun scripts/convert-addresses.js
+bun scripts/split-base-json.js
+```
+
+This ensures all data files are in sync with the latest structure and ready for use by the API.
 
 ### Development
 

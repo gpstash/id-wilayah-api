@@ -14,17 +14,6 @@ function parseAddresses(raw) {
   const lines = raw.trim().split(/\r?\n/);
   const tree = {};
 
-  // Determine the level based on code format
-  function getAddressType(code) {
-    const parts = code.split('.');
-    switch (parts.length) {
-      case 1: return 'STATE';     // e.g., "11"
-      case 2: return 'CITY';      // e.g., "11.01"
-      case 3: return 'DISTRICT';  // e.g., "11.01.01"
-      default: return 'VILLAGE';  // e.g., "11.01.01.2001"
-    }
-  }
-
   // Process each line in the file
   for (const line of lines) {
     const match = /^'([^']+)'\s*,\s*'([^']+)'$/.exec(line);
@@ -51,13 +40,7 @@ function parseAddresses(raw) {
         if (!currentNode[currentPath]) {
           currentNode[currentPath] = {
             value: name,
-            type: getAddressType(currentPath)
           };
-          
-          // Add children object if this isn't a leaf node
-          if (i < parts.length - 1) {
-            currentNode[currentPath].children = {};
-          }
         } else {
           // If node exists, update its value (in case it was created as a parent earlier)
           currentNode[currentPath].value = name;
@@ -66,22 +49,11 @@ function parseAddresses(raw) {
       } 
       // Otherwise we're building a parent node
       else {
-        // Create parent node if it doesn't exist
-        if (!currentNode[currentPath]) {
-          currentNode[currentPath] = {
-            value: '', // Will be filled when we process the actual line for this code
-            type: getAddressType(currentPath),
-            children: {}
-          };
+        // For intermediate nodes, ensure children exist
+        if (!currentNode[parts.slice(0, i + 1).join('.')]) {
+          currentNode[parts.slice(0, i + 1).join('.')] = { children: {} };
         }
-        
-        // Ensure children exists
-        if (!currentNode[currentPath].children) {
-          currentNode[currentPath].children = {};
-        }
-        
-        // Move to the children for the next iteration
-        currentNode = currentNode[currentPath].children;
+        currentNode = currentNode[parts.slice(0, i + 1).join('.')].children;
       }
     }
   }
@@ -114,7 +86,6 @@ try {
     console.log(JSON.stringify({
       [firstStateKey]: {
         value: firstState.value,
-        type: firstState.type,
         children: firstState.children ? 
           Object.keys(firstState.children).length + ' cities' : 
           'No children'
