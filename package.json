@@ -1,0 +1,36 @@
+{
+	"name": "id-wilayah-api",
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy --minify",
+		"cf-typegen": "wrangler types --env-interface CloudflareBindings",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"prepare": "husky",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"hono": "^4.7.7",
+		"zod": "^3.24.3"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250420.0",
+		"@hono/eslint-config": "^2.0.0",
+		"@types/node": "^22.14.1",
+		"eslint": "^9.25.0",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.5.1",
+		"prettier": "^3.5.3",
+		"ts-node": "^10.9.2",
+		"vitest": "^3.1.1",
+		"wrangler": "^4.12.0"
+	},
+	"lint-staged": {
+		"*.{ts}": [
+			"eslint --fix"
+		]
+	},
+	"packageManager": "pnpm@10.8.0"
+}
