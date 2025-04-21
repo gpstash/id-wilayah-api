@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="id" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="keywords" content="Indonesian API, wilayah API, province data, city data, district data, village data, address validation, Indonesia region API, administrative region API, API Indonesia, API wilayah, data provinsi, data kota, data kabupaten, data kecamatan, data desa, validasi alamat, API wilayah Indonesia, data administrasi Indonesia" />
-  <meta name="last-modified" content="2025-04-21T23:58:59+07:00" />
-  <title>ID Wilayah API – Indonesian Administrative Region Data API Documentation & Playground</title>
-  <meta name="description" content="ID Wilayah API provides up-to-date, structured Indonesian administrative region data (provinces, cities, districts, villages) for developers. Explore API documentation, playground, and integration examples." />
+  <meta name="last-modified" content="2025-04-22T00:00:23+07:00" />
+  <title>ID Wilayah API – Dokumentasi & Playground Data Wilayah Indonesia</title>
+  <meta name="description" content="ID Wilayah API menyediakan data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru dan terstruktur untuk developer. Eksplor dokumentasi API, playground, dan contoh integrasi." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://id-wilayah-api.gilangpratama.id/" />
   <meta name="author" content="gpstash" />
@@ -14,18 +14,20 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="alternate" hreflang="id" href="https://id-wilayah-api.gilangpratama.id/" />
+  <link rel="alternate" hreflang="en" href="https://id-wilayah-api.gilangpratama.id/?lang=en" />
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://id-wilayah-api.gilangpratama.id/" />
-  <meta property="og:title" content="ID Wilayah API – Indonesian Administrative Region Data API Documentation & Playground" />
-  <meta property="og:description" content="Up-to-date, structured Indonesian administrative region data API for developers. Provinces, cities, districts, villages. Fast, reliable, and easy to use." />
+  <meta property="og:title" content="ID Wilayah API – Dokumentasi & Playground Data Wilayah Indonesia" />
+  <meta property="og:description" content="ID Wilayah API menyediakan data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru dan terstruktur untuk developer." />
   <meta property="og:site_name" content="ID Wilayah API" />
   <meta property="og:image" content="/og-image.png" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://id-wilayah-api.gilangpratama.id/" />
-  <meta name="twitter:title" content="ID Wilayah API – Indonesian Administrative Region Data API Documentation & Playground" />
-  <meta name="twitter:description" content="Up-to-date, structured Indonesian administrative region data API for developers. Provinces, cities, districts, villages. Fast, reliable, and easy to use." />
+  <meta name="twitter:title" content="ID Wilayah API – Dokumentasi & Playground Data Wilayah Indonesia" />
+  <meta name="twitter:description" content="ID Wilayah API menyediakan data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru dan terstruktur untuk developer." />
   <meta name="twitter:image" content="/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,34 +84,36 @@
 </head>
 <body>
   <div class="container" role="main">
-    <span class="badge">ID Wilayah API</span>
-    <h1>API Documentation & Playground</h1>
-    <div class="desc">
-      A simple, modern API for Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages.<br>
-      Built for developers who need up-to-date, structured wilayah info for forms, dashboards, or address validation.
+    <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+      <button id="lang-id" aria-pressed="true" style="margin-right:8px;font-weight:bold;">ID</button>
+      <button id="lang-en" aria-pressed="false">EN</button>
     </div>
-
-    <h2>Available Endpoints</h2>
-    <ul class="endpoint-list">
-      <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— List all provinces (states)</span></li>
-      <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— List all cities/regencies in a province</span></li>
-      <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— List all districts in a city/regency</span></li>
-      <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— List all villages in a district</span></li>
-    </ul>
-
-    <div class="howto">
-      <h2>How to Use</h2>
-      <p>Simply send a <b>GET</b> request to the desired endpoint. Example using <code>curl</code>:</p>
-      <pre>curl https://id-wilayah-api.gilangpratama.id/states</pre>
-      <p>Or from JavaScript:</p>
-      <pre>fetch('https://id-wilayah-api.gilangpratama.id/states')
-  .then(r =&gt; r.json())
+    <div id="content-id" lang="id">
+      <span class="badge">ID Wilayah API</span>
+      <h1>Dokumentasi & Playground API</h1>
+      <div class="desc">
+        API sederhana untuk data wilayah administrasi Indonesia: provinsi, kota/kabupaten, kecamatan, dan desa.<br>
+        Dibuat untuk developer yang membutuhkan data wilayah terstruktur dan terbaru untuk form, dashboard, atau validasi alamat.
+      </div>
+      <h2>Endpoint Tersedia</h2>
+      <ul class="endpoint-list">
+        <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— Daftar semua provinsi</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— Daftar semua kota/kabupaten di provinsi</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— Daftar semua kecamatan di kota/kabupaten</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— Daftar semua desa di kecamatan</span></li>
+      </ul>
+      <div class="howto">
+        <h2>Cara Pakai</h2>
+        <p>Kirim <b>GET</b> request ke endpoint yang diinginkan. Contoh menggunakan <code>curl</code>:</p>
+        <pre>curl https://id-wilayah-api.gilangpratama.id/states</pre>
+        <p>Atau dari JavaScript:</p>
+        <pre>fetch('https://id-wilayah-api.gilangpratama.id/states')
+  .then(r => r.json())
   .then(console.log);</pre>
-    </div>
-
-    <div class="example">
-      <h2>Example Response</h2>
-      <pre>[
+      </div>
+      <div class="example">
+        <h2>Contoh Response</h2>
+        <pre>[
   {
     "code": "11",
     "value": "ACEH"
@@ -118,57 +122,149 @@
     "code": "12",
     "value": "SUMATERA UTARA"
   },
+  ...
+]</pre>
+      </div>
+      <div class="test">
+        <h2>Coba Endpoint</h2>
+        <form class="test-form" id="api-tester">
+          <label for="endpoint">Endpoint</label>
+          <select id="endpoint" name="endpoint">
+            <option value="states">/states</option>
+            <option value="cities">/states/31/cities</option>
+            <option value="districts">/cities/31.74/districts</option>
+            <option value="villages">/districts/31.74.04/villages</option>
+          </select>
+          <button type="submit">Kirim Request</button>
+        </form>
+        <div id="response" class="response-box" style="display:none"></div>
+      </div>
+    </div>
+    <div id="content-en" lang="en" style="display:none">
+      <span class="badge">ID Wilayah API</span>
+      <h1>API Documentation & Playground</h1>
+      <div class="desc">
+        A simple API for Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages.<br>
+        Built for developers who need up-to-date, structured wilayah info for forms, dashboards, or address validation.
+      </div>
+      <h2>Available Endpoints</h2>
+      <ul class="endpoint-list">
+        <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— List all provinces (states)</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— List all cities/regencies in a province</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— List all districts in a city/regency</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— List all villages in a district</span></li>
+      </ul>
+      <div class="howto">
+        <h2>How to Use</h2>
+        <p>Simply send a <b>GET</b> request to the desired endpoint. Example using <code>curl</code>:</p>
+        <pre>curl https://id-wilayah-api.gilangpratama.id/states</pre>
+        <p>Or from JavaScript:</p>
+        <pre>fetch('https://id-wilayah-api.gilangpratama.id/states')
+  .then(r => r.json())
+  .then(console.log);</pre>
+      </div>
+      <div class="example">
+        <h2>Example Response</h2>
+        <pre>[
   {
-    "code": "13",
-    "value": "SUMATERA BARAT"
+    "code": "11",
+    "value": "ACEH"
+  },
+  {
+    "code": "12",
+    "value": "SUMATERA UTARA"
   },
   ...
 ]</pre>
-    </div>
-
-    <div class="test">
-      <h2>Test an Endpoint</h2>
-      <form class="test-form" id="api-tester">
-        <label for="endpoint">Endpoint</label>
-        <select id="endpoint" name="endpoint">
-          <option value="states">/states</option>
-          <option value="cities">/states/31/cities</option>
-          <option value="districts">/cities/31.74/districts</option>
-          <option value="villages">/districts/31.74.04/villages</option>
-        </select>
-        <button type="submit">Send Request</button>
-      </form>
-      <div id="response" class="response-box" style="display:none"></div>
+      </div>
+      <div class="test">
+        <h2>Test an Endpoint</h2>
+        <form class="test-form" id="api-tester-en">
+          <label for="endpoint-en">Endpoint</label>
+          <select id="endpoint-en" name="endpoint">
+            <option value="states">/states</option>
+            <option value="cities">/states/31/cities</option>
+            <option value="districts">/cities/31.74/districts</option>
+            <option value="villages">/districts/31.74.04/villages</option>
+          </select>
+          <button type="submit">Send Request</button>
+        </form>
+        <div id="response-en" class="response-box" style="display:none"></div>
+      </div>
     </div>
   </div>
   <script>
-    const form = document.getElementById('api-tester');
-    const responseBox = document.getElementById('response');
+    // Language switcher
+    const btnID = document.getElementById('lang-id');
+    const btnEN = document.getElementById('lang-en');
+    const contentID = document.getElementById('content-id');
+    const contentEN = document.getElementById('content-en');
+    btnID.onclick = function() {
+      btnID.setAttribute('aria-pressed', 'true');
+      btnEN.setAttribute('aria-pressed', 'false');
+      contentID.style.display = '';
+      contentEN.style.display = 'none';
+      document.documentElement.lang = 'id';
+    };
+    btnEN.onclick = function() {
+      btnID.setAttribute('aria-pressed', 'false');
+      btnEN.setAttribute('aria-pressed', 'true');
+      contentID.style.display = 'none';
+      contentEN.style.display = '';
+      document.documentElement.lang = 'en';
+    };
+    // API tester ID
+    const formID = document.getElementById('api-tester');
+    const responseBoxID = document.getElementById('response');
     const endpoints = {
       'states': '/states',
       'cities': '/states/31/cities',
       'districts': '/cities/31.74/districts',
       'villages': '/districts/31.74.04/villages'
     }
-    form.addEventListener('submit', async (e) => {
+    formID.addEventListener('submit', async (e) => {
       e.preventDefault();
-      responseBox.style.display = 'none';
-      responseBox.textContent = '';
+      responseBoxID.style.display = 'none';
+      responseBoxID.textContent = '';
       const baseUrl = 'https://id-wilayah-api.gilangpratama.id';
-      const endpoint = form['endpoint'].value;
+      const endpoint = formID['endpoint'].value;
       const url = baseUrl + endpoints[endpoint];
-      responseBox.textContent = 'Loading...';
-      responseBox.style.display = 'block';
+      responseBoxID.textContent = 'Memuat...';
+      responseBoxID.style.display = 'block';
       try {
         const res = await fetch(url);
         const text = await res.text();
         try {
-          responseBox.textContent = JSON.stringify(JSON.parse(text), null, 2);
+          responseBoxID.textContent = JSON.stringify(JSON.parse(text), null, 2);
         } catch {
-          responseBox.textContent = text;
+          responseBoxID.textContent = text;
         }
       } catch (err) {
-        responseBox.textContent = 'Request failed: ' + err;
+        responseBoxID.textContent = 'Permintaan gagal: ' + err;
+      }
+    });
+    // API tester EN
+    const formEN = document.getElementById('api-tester-en');
+    const responseBoxEN = document.getElementById('response-en');
+    formEN.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      responseBoxEN.style.display = 'none';
+      responseBoxEN.textContent = '';
+      const baseUrl = 'https://id-wilayah-api.gilangpratama.id';
+      const endpoint = formEN['endpoint-en'].value;
+      const url = baseUrl + endpoints[endpoint];
+      responseBoxEN.textContent = 'Loading...';
+      responseBoxEN.style.display = 'block';
+      try {
+        const res = await fetch(url);
+        const text = await res.text();
+        try {
+          responseBoxEN.textContent = JSON.stringify(JSON.parse(text), null, 2);
+        } catch {
+          responseBoxEN.textContent = text;
+        }
+      } catch (err) {
+        responseBoxEN.textContent = 'Request failed: ' + err;
       }
     });
   </script>
