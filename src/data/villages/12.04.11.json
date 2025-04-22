@@ -56,6 +56,10 @@
     "value": "Siofabanua"
   },
   {
+    "code": "12.04.11.2016",
+    "value": "Sifaoro'asi Uluhou"
+  },
+  {
     "code": "12.04.11.2017",
     "value": "Dahana"
   },
@@ -66,6 +70,10 @@
   {
     "code": "12.04.11.2019",
     "value": "Banua Sibohou Silima Ewali"
+  },
+  {
+    "code": "12.04.11.2020",
+    "value": "Si'ofaewali Selatan"
   },
   {
     "code": "12.04.11.2021",
@@ -86,5 +94,9 @@
   {
     "code": "12.04.11.2025",
     "value": "Sindrondro"
+  },
+  {
+    "code": "12.04.11.2026",
+    "value": "Balale Toba'a"
   }
 ]

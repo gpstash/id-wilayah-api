@@ -40,12 +40,20 @@
     "value": "Hilimbaruzo"
   },
   {
+    "code": "12.78.01.2008",
+    "value": "Hilina'a"
+  },
+  {
     "code": "12.78.01.2009",
     "value": "Iraonogeba"
   },
   {
     "code": "12.78.01.2010",
     "value": "Lasara Bahili"
+  },
+  {
+    "code": "12.78.01.2011",
+    "value": "Lolowonu Niko'otano"
   },
   {
     "code": "12.78.01.2012",
@@ -62,6 +70,10 @@
   {
     "code": "12.78.01.2015",
     "value": "Miga"
+  },
+  {
+    "code": "12.78.01.2016",
+    "value": "Mo'awo"
   },
   {
     "code": "12.78.01.2017",
@@ -90,6 +102,10 @@
   {
     "code": "12.78.01.2023",
     "value": "Sifalaete Ulu"
+  },
+  {
+    "code": "12.78.01.2024",
+    "value": "Sihare'o II Tabaloho"
   },
   {
     "code": "12.78.01.2025",

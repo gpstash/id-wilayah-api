@@ -1,7 +1,31 @@
 [
   {
+    "code": "65.03.18.2001",
+    "value": "Pa' Betung"
+  },
+  {
     "code": "65.03.18.2002",
     "value": "Long Sepayang"
+  },
+  {
+    "code": "65.03.18.2003",
+    "value": "Pa' Pawan"
+  },
+  {
+    "code": "65.03.18.2004",
+    "value": "Pa' Melade"
+  },
+  {
+    "code": "65.03.18.2005",
+    "value": "Pa' Kebuan"
+  },
+  {
+    "code": "65.03.18.2006",
+    "value": "Pa' Umung"
+  },
+  {
+    "code": "65.03.18.2007",
+    "value": "Pa' Rangeb"
   },
   {
     "code": "65.03.18.2008",
@@ -16,12 +40,28 @@
     "value": "Long Nuat"
   },
   {
+    "code": "65.03.18.2011",
+    "value": "Pa' Pala"
+  },
+  {
     "code": "65.03.18.2012",
     "value": "Sinar Baru"
   },
   {
+    "code": "65.03.18.2013",
+    "value": "Pa' Lidung"
+  },
+  {
+    "code": "65.03.18.2014",
+    "value": "Pa' Raye"
+  },
+  {
     "code": "65.03.18.2015",
     "value": "Bungayan"
+  },
+  {
+    "code": "65.03.18.2016",
+    "value": "Wa' Yagung"
   },
   {
     "code": "65.03.18.2017",

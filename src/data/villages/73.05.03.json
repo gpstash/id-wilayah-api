@@ -1,5 +1,9 @@
 [
   {
+    "code": "73.05.03.1001",
+    "value": "Pa'bundukang"
+  },
+  {
     "code": "73.05.03.1002",
     "value": "Pattene"
   },
@@ -30,6 +34,10 @@
   {
     "code": "73.05.03.2008",
     "value": "Lantang"
+  },
+  {
+    "code": "73.05.03.2009",
+    "value": "Su'rulangi"
   },
   {
     "code": "73.05.03.2011",

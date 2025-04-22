@@ -1,6 +1,42 @@
 [
   {
+    "code": "73.26.06.1002",
+    "value": "Sa'dan Malimbong"
+  },
+  {
+    "code": "73.26.06.1004",
+    "value": "Sa'dan Matalo"
+  },
+  {
+    "code": "73.26.06.2001",
+    "value": "Sa'dan Ulusalu"
+  },
+  {
+    "code": "73.26.06.2003",
+    "value": "Sa'dan Balong Pasange'"
+  },
+  {
+    "code": "73.26.06.2005",
+    "value": "Sa'dan Pebulian"
+  },
+  {
     "code": "73.26.06.2006",
     "value": "Sangkaropi"
+  },
+  {
+    "code": "73.26.06.2007",
+    "value": "Sa'dan Tiroallo"
+  },
+  {
+    "code": "73.26.06.2008",
+    "value": "Sa'dan Andulan"
+  },
+  {
+    "code": "73.26.06.2009",
+    "value": "Sa'dan Pesondongan"
+  },
+  {
+    "code": "73.26.06.2010",
+    "value": "Sa'dan Liku Lambe'"
   }
 ]

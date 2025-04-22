@@ -8,6 +8,10 @@
     "value": "Orahili Susua"
   },
   {
+    "code": "12.14.09.2003",
+    "value": "Hiliana'a Susua"
+  },
+  {
     "code": "12.14.09.2004",
     "value": "Hiliorahua"
   },
@@ -62,5 +66,9 @@
   {
     "code": "12.14.09.2018",
     "value": "Hiliadulosoi"
+  },
+  {
+    "code": "12.14.09.2019",
+    "value": "Orahili Bo'e"
   }
 ]
