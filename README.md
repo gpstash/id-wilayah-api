@@ -54,6 +54,18 @@ bun scripts/split-base-json.js
 
 This ensures all data files are in sync with the latest structure and ready for use by the API.
 
+### Validate Data Output
+
+To validate that the split JSON files match the raw data, run:
+
+```sh
+bun scripts/validate-split-output.js [states|cities|districts|villages]
+```
+
+- You can specify one or more arguments (e.g. `states cities`).
+- If no arguments are given, all will be checked.
+- The script logs every code/value check and reports mismatches or missing entries.
+
 ### Development
 
 ```sh
