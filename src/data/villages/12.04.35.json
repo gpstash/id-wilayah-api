@@ -8,6 +8,10 @@
     "value": "Hilibadalu"
   },
   {
+    "code": "12.04.35.2003",
+    "value": "La'uri"
+  },
+  {
     "code": "12.04.35.2004",
     "value": "Hilimbana"
   },
@@ -16,11 +20,27 @@
     "value": "Saitagaramba"
   },
   {
+    "code": "12.04.35.2006",
+    "value": "Sogae'adu"
+  },
+  {
     "code": "12.04.35.2007",
     "value": "Baruzo"
   },
   {
     "code": "12.04.35.2008",
     "value": "Tulumbaho"
+  },
+  {
+    "code": "12.04.35.2009",
+    "value": "Sisarahili Sogae'adu"
+  },
+  {
+    "code": "12.04.35.2010",
+    "value": "We'a-we'a"
+  },
+  {
+    "code": "12.04.35.2011",
+    "value": "Sihare'o Sogae'adu"
   }
 ]

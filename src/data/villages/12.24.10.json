@@ -12,12 +12,20 @@
     "value": "Holi"
   },
   {
+    "code": "12.24.10.2004",
+    "value": "Sifaoro'asi"
+  },
+  {
     "code": "12.24.10.2005",
     "value": "Hilizukhu"
   },
   {
     "code": "12.24.10.2006",
     "value": "Onozalukhu"
+  },
+  {
+    "code": "12.24.10.2007",
+    "value": "Hilina'a"
   },
   {
     "code": "12.24.10.2008",
@@ -62,6 +70,10 @@
   {
     "code": "12.24.10.2018",
     "value": "Lasara"
+  },
+  {
+    "code": "12.24.10.2019",
+    "value": "Sihene'asi"
   },
   {
     "code": "12.24.10.2020",

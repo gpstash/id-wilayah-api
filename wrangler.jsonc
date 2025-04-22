@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "id-wilayah-api",
+	"name": "lokaid",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-04-20",
 	"observability": {
@@ -12,7 +12,7 @@
 	},
 	"routes": [
 		{
-			"pattern": "id-wilayah-api.gilangpratama.id",
+			"pattern": "lokaid.gilangpratama.id",
 			"custom_domain": true
 		}
 	],

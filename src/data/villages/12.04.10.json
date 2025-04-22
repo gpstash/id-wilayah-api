@@ -4,8 +4,16 @@
     "value": "Hilimoasio"
   },
   {
+    "code": "12.04.10.2006",
+    "value": "Tetegeona'ai"
+  },
+  {
     "code": "12.04.10.2007",
     "value": "Laowo Hilimbaruzo"
+  },
+  {
+    "code": "12.04.10.2008",
+    "value": "Hililawa'e"
   },
   {
     "code": "12.04.10.2009",
@@ -28,6 +36,10 @@
     "value": "Ahedano"
   },
   {
+    "code": "12.04.10.2018",
+    "value": "Hilina'a Tafuo"
+  },
+  {
     "code": "12.04.10.2019",
     "value": "Hilionozega"
   },
@@ -44,12 +56,20 @@
     "value": "Saiwahili Hiliadulo"
   },
   {
+    "code": "12.04.10.2024",
+    "value": "Maliwa'a"
+  },
+  {
     "code": "12.04.10.2025",
     "value": "Biouti"
   },
   {
     "code": "12.04.10.2026",
     "value": "Awoni Lauso"
+  },
+  {
+    "code": "12.04.10.2027",
+    "value": "Bobozioli Loloana'a"
   },
   {
     "code": "12.04.10.2028",
@@ -70,6 +90,18 @@
   {
     "code": "12.04.10.2032",
     "value": "Orahili Zuzundrao"
+  },
+  {
+    "code": "12.04.10.2033",
+    "value": "Tiga Serangkai Maliwa'a"
+  },
+  {
+    "code": "12.04.10.2034",
+    "value": "Hiligogowaya Maliwa'a"
+  },
+  {
+    "code": "12.04.10.2035",
+    "value": "Hili'adulo"
   },
   {
     "code": "12.04.10.2036",

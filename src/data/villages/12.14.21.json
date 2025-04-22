@@ -12,8 +12,16 @@
     "value": "Simandraolo"
   },
   {
+    "code": "12.14.21.2004",
+    "value": "Bawosalo'o Bawoluo"
+  },
+  {
     "code": "12.14.21.2005",
     "value": "Hilimbuasi"
+  },
+  {
+    "code": "12.14.21.2006",
+    "value": "Simandraolo O'o'u"
   },
   {
     "code": "12.14.21.2007",
@@ -30,5 +38,9 @@
   {
     "code": "12.14.21.2010",
     "value": "Hilinamazihono Moale"
+  },
+  {
+    "code": "12.14.21.2011",
+    "value": "Balohili O'o'u"
   }
 ]

@@ -1,5 +1,9 @@
 [
   {
+    "code": "65.03.05.2002",
+    "value": "Pa' Padi"
+  },
+  {
     "code": "65.03.05.2003",
     "value": "Cinglat"
   },
@@ -8,8 +12,16 @@
     "value": "Liang Butan"
   },
   {
+    "code": "65.03.05.2029",
+    "value": "Pa' Rupai"
+  },
+  {
     "code": "65.03.05.2030",
     "value": "Ba Sikor"
+  },
+  {
+    "code": "65.03.05.2031",
+    "value": "Pa' Nado"
   },
   {
     "code": "65.03.05.2032",
@@ -26,6 +38,18 @@
   {
     "code": "65.03.05.2035",
     "value": "Long Berayang"
+  },
+  {
+    "code": "65.03.05.2036",
+    "value": "Pa' Api"
+  },
+  {
+    "code": "65.03.05.2037",
+    "value": "Pa' Sire"
+  },
+  {
+    "code": "65.03.05.2038",
+    "value": "Wa' Yanud"
   },
   {
     "code": "65.03.05.2039",
@@ -50,5 +74,21 @@
   {
     "code": "65.03.05.2046",
     "value": "Liang Biadung"
+  },
+  {
+    "code": "65.03.05.2047",
+    "value": "Wa' Laya"
+  },
+  {
+    "code": "65.03.05.2048",
+    "value": "Pa' Matung"
+  },
+  {
+    "code": "65.03.05.2049",
+    "value": "Pa' Terutun"
+  },
+  {
+    "code": "65.03.05.2065",
+    "value": "Pa' Putuk"
   }
 ]

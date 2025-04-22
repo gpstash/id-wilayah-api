@@ -1,5 +1,9 @@
 [
   {
+    "code": "65.03.19.2001",
+    "value": "Pa' Mulak"
+  },
+  {
     "code": "65.03.19.2002",
     "value": "Long Puak"
   },
@@ -16,6 +20,10 @@
     "value": "Long Kabid"
   },
   {
+    "code": "65.03.19.2006",
+    "value": "Pa' Inan"
+  },
+  {
     "code": "65.03.19.2007",
     "value": "Lembudud"
   },
@@ -24,8 +32,36 @@
     "value": "Long Tugul"
   },
   {
+    "code": "65.03.19.2009",
+    "value": "Pa' Butal"
+  },
+  {
+    "code": "65.03.19.2010",
+    "value": "Pa' Delung"
+  },
+  {
+    "code": "65.03.19.2011",
+    "value": "Pa' Urud"
+  },
+  {
+    "code": "65.03.19.2012",
+    "value": "Pa' Kemut"
+  },
+  {
+    "code": "65.03.19.2013",
+    "value": "Pa' Kidang"
+  },
+  {
     "code": "65.03.19.2014",
     "value": "Lembada"
+  },
+  {
+    "code": "65.03.19.2015",
+    "value": "Pa' Payak"
+  },
+  {
+    "code": "65.03.19.2016",
+    "value": "Pa' Pirit"
   },
   {
     "code": "65.03.19.2017",
@@ -46,5 +82,21 @@
   {
     "code": "65.03.19.2021",
     "value": "Lepatar"
+  },
+  {
+    "code": "65.03.19.2022",
+    "value": "Pa' Mering"
+  },
+  {
+    "code": "65.03.19.2023",
+    "value": "Pa' Pani"
+  },
+  {
+    "code": "65.03.19.2024",
+    "value": "Pa' Lutut"
+  },
+  {
+    "code": "65.03.19.2025",
+    "value": "Ma' Libu"
   }
 ]

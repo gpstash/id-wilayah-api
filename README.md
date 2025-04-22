@@ -1,6 +1,10 @@
-# ID Wilayah API
 
----
+
+<p align="center">
+  <img src="public/images/LokaID-red.png" alt="LokaID Logo" width="120" />
+</p>
+
+# LokaID
 
 ## Description
 
@@ -9,8 +13,6 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 ## Data Structure
 
 - The address data files (`states.json`, `cities/*.json`, `districts/*.json`, `villages/*.json`) only include `code` and `value` for each state, city, district, and village.
-- This change reduces data size and improves API response performance.
-- All API responses, validation logic, and tests use only `code` and `value`.
 
 ## Available Endpoints
 

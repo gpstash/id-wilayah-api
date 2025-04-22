@@ -1,5 +1,9 @@
 [
   {
+    "code": "53.02.03.2001",
+    "value": "O'besi"
+  },
+  {
     "code": "53.02.03.2002",
     "value": "Eonbesi"
   },
@@ -48,11 +52,23 @@
     "value": "Fatukoto"
   },
   {
+    "code": "53.02.03.2016",
+    "value": "Kokfe'u"
+  },
+  {
+    "code": "53.02.03.2017",
+    "value": "To'fen"
+  },
+  {
     "code": "53.02.03.2018",
     "value": "Taiftob"
   },
   {
     "code": "53.02.03.2019",
     "value": "Iusmolo"
+  },
+  {
+    "code": "53.02.03.2020",
+    "value": "To'manat"
   }
 ]
