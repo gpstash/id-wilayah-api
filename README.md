@@ -1,10 +1,10 @@
-
+# LokaID
 
 <p align="center">
-  <img src="public/images/LokaID-red.png" alt="LokaID Logo" width="120" />
+  <img src="public/images/LokaID-logo.png" alt="LokaID Logo" width="120" />
 </p>
 
-# LokaID
+---
 
 ## Description
 
@@ -49,7 +49,6 @@ pnpm install
 To generate the up-to-date JSON data files from the raw source, run:
 
 ```sh
-bun scripts/convert-addresses.js
 bun scripts/split-base-json.js
 ```
 
