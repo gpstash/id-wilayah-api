@@ -27,4 +27,4 @@ export interface ErrorResponse {
 /**
  * Cloudflare Worker bindings
  */
-export interface CloudflareBindings {}
+export interface CloudflareBindings extends Cloudflare.Env {}

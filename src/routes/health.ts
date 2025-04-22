@@ -1,4 +1,6 @@
 import { Hono } from 'hono';
+import type { CloudflareBindings } from '../types';
+import { createSuccessResponse } from '../utils/http';
 
 /**
  * Creates health check route
@@ -12,11 +14,10 @@ export function createHealthRoute() {
    * @returns Status information about the API
    */
   router.get('/', (c) => {
-    return c.json({
-      status: 'ok',
+    return c.json(createSuccessResponse({
       timestamp: new Date().toISOString(),
       version: '1.0.0',
-    });
+    }));
   });
 
   return router;

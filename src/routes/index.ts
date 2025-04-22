@@ -8,7 +8,7 @@ import { createStateRoutes } from './states';
  * Creates all application routes
  * @returns Hono app with all routes configured
  */
-export function createRoutes() {
+export function createRoutes(): Hono<{Bindings: CloudflareBindings}> {
   const app = new Hono<{Bindings: CloudflareBindings}>();
   
   // Register routes
