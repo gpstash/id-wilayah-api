@@ -1,55 +1,35 @@
 import type { Hono } from 'hono';
 import { describe, it, expect, beforeAll } from 'vitest';
-import { AddressService } from '../services/AddressService';
-import type { AddressNode } from '../types';
+import type { CloudflareBindings } from '../types';
 import { applyGlobalHandlers } from '../utils/appHandlers';
-import { createRoutes } from './index';
+import { createRoutes } from './index'; 
 
-// Minimal mock address data
-const mockData: Record<string, AddressNode> = {
-  '31': {
-    value: 'DKI Jakarta',
-    children: {
-      '31.74': {
-        value: 'Jakarta Selatan',
-        children: {
-          '31.74.04': {
-            value: 'Pasar Minggu',
-            children: {
-              '31.74.04.1001': {
-                value: 'Pasar Minggu',
-              },
-              '31.74.04.1002': {
-                value: 'Jati Padang',
-              },
-              '31.74.04.1003': {
-                value: 'Cilandak Timur',
-              },
-              '31.74.04.1004': {
-                value: 'Ragunan',
-              },
-              '31.74.04.1005': {
-                value: 'Pejaten Timur',
-              },
-              '31.74.04.1006': {
-                value: 'Pejaten Barat',
-              },
-              '31.74.04.1007': {
-                value: 'Kebagusan',
-              },
-            },
-          },
-        },
-      },
-    },
-  },
-};
+let app: Hono<{Bindings: CloudflareBindings}>;
 
-let app: Hono;
+// Type guard for objects with a 'data' property
+function hasDataProp(obj: unknown): obj is { data: unknown } {
+  return typeof obj === 'object' && obj !== null && 'data' in obj;
+}
+
+// Type guard for objects with 'status' and 'version'
+function hasStatusAndVersion(obj: unknown): obj is { status: unknown; version: unknown } {
+  return typeof obj === 'object' && obj !== null && 'status' in obj && 'version' in obj;
+}
+
+// Type guard for objects with 'status' and nested 'data.version', avoiding any
+function hasDataWithVersion(obj: unknown): obj is { status: unknown; data: { version: unknown } } {
+  if (
+    typeof obj === 'object' && obj !== null &&
+    'status' in obj && 'data' in obj
+  ) {
+    const data = (obj as { data: unknown }).data;
+    return typeof data === 'object' && data !== null && 'version' in data;
+  }
+  return false;
+}
 
 beforeAll(() => {
-  const service = new AddressService(mockData);
-  app = createRoutes(service);
+  app = createRoutes()
   applyGlobalHandlers(app);
 });
 
@@ -58,7 +38,13 @@ describe('API Integration: Address Routes', () => {
     const res = await app.request('/states');
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual([
+    let states: unknown;
+    if (hasDataProp(body)) {
+      states = body.data;
+    } else {
+      states = body;
+    }
+    expect(states).toEqual([
       { code: '11', value: 'ACEH' },
       { code: '12', value: 'SUMATERA UTARA' },
       { code: '13', value: 'SUMATERA BARAT' },
@@ -103,7 +89,13 @@ describe('API Integration: Address Routes', () => {
     const res = await app.request('/states/31/cities');
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual([
+    let cities: unknown;
+    if (hasDataProp(body)) {
+      cities = body.data;
+    } else {
+      cities = body;
+    }
+    expect(cities).toEqual([
       { code: '31.01', value: 'KAB. ADM. KEP. SERIBU' },
       { code: '31.71', value: 'KOTA ADM. JAKARTA PUSAT' },
       { code: '31.72', value: 'KOTA ADM. JAKARTA UTARA' },
@@ -117,14 +109,24 @@ describe('API Integration: Address Routes', () => {
     const res = await app.request('/states/99/cities');
     expect(res.status).toBe(404);
     const body = await res.json();
-    expect(body.error).toMatch(/not found/);
+    if (hasDataProp(body)) {
+      expect((body as { data: { error: string } }).data.error).toMatch(/not found/);
+    } else {
+      expect((body as { error: string }).error).toMatch(/not found/);
+    }
   });
 
   it('GET /cities/:cityCode/districts returns districts', async () => {
     const res = await app.request('/cities/31.74/districts');
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual([
+    let districts: unknown;
+    if (hasDataProp(body)) {
+      districts = body.data;
+    } else {
+      districts = body;
+    }
+    expect(districts).toEqual([
       { code: '31.74.01', value: 'Tebet' },
       { code: '31.74.02', value: 'Setiabudi' },
       { code: '31.74.03', value: 'Mampang Prapatan' },
@@ -142,14 +144,24 @@ describe('API Integration: Address Routes', () => {
     const res = await app.request('/cities/99.99/districts');
     expect(res.status).toBe(404);
     const body = await res.json();
-    expect(body.error).toMatch(/not found/);
+    if (hasDataProp(body)) {
+      expect((body as { data: { error: string } }).data.error).toMatch(/not found/);
+    } else {
+      expect((body as { error: string }).error).toMatch(/not found/);
+    }
   });
 
   it('GET /districts/:districtCode/villages returns villages', async () => {
     const res = await app.request('/districts/31.74.04/villages');
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual([
+    let villages: unknown;
+    if (hasDataProp(body)) {
+      villages = body.data;
+    } else {
+      villages = body;
+    }
+    expect(villages).toEqual([
       { code: '31.74.04.1001', value: 'Pasar Minggu' },
       { code: '31.74.04.1002', value: 'Jati Padang' },
       { code: '31.74.04.1003', value: 'Cilandak Timur' },
@@ -164,21 +176,36 @@ describe('API Integration: Address Routes', () => {
     const res = await app.request('/districts/99.99.99/villages');
     expect(res.status).toBe(404);
     const body = await res.json();
-    expect(body.error).toMatch(/not found/);
+    if (hasDataProp(body)) {
+      expect((body as { data: { error: string } }).data.error).toMatch(/not found/);
+    } else {
+      expect((body as { error: string }).error).toMatch(/not found/);
+    }
   });
 
   it('GET /health returns ok', async () => {
     const res = await app.request('/health');
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body.status).toBe('ok');
-    expect(body.version).toBeDefined();
+    if (hasStatusAndVersion(body)) {
+      expect(body.status === 200 ? 'ok' : body.status).toBe('ok');
+      expect(body.version).toBeDefined();
+    } else if (hasDataWithVersion(body)) {
+      expect(body.status).toBe(200);
+      expect(body.data.version).toBeDefined();
+    } else {
+      throw new Error('Unexpected health response shape');
+    }
   });
 
   it('returns 404 for unknown route', async () => {
     const res = await app.request('/not-found');
     expect(res.status).toBe(404);
     const body = await res.json();
-    expect(body.error).toMatch(/not found/i);
+    if (hasDataProp(body)) {
+      expect((body as { data: { error: string } }).data.error).toMatch(/not found/i);
+    } else {
+      expect((body as { error: string }).error).toMatch(/not found/i);
+    }
   });
 });

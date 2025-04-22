@@ -9,7 +9,7 @@ export default [
     ignores: [
       '**/.wrangler/**',
       'eslint.config.*',
-      'scripts/convert-addresses.js',
+      'scripts/*.js',
       'worker-configuration.d.ts',
       '*.js',
       '*.mjs',

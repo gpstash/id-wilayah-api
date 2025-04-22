@@ -1,5 +1,8 @@
 import type { Context } from 'hono';
+import type { InvalidJSONValue, JSONValue } from 'hono/utils/types';
 import type { ErrorResponse, CloudflareBindings } from '../types';
+
+export const SUCCESS_MESSAGE = 'SUCCESS';
 
 /**
  * Create a standardized error response
@@ -26,4 +29,12 @@ export const validateCodeParam = (c: Context<{ Bindings: CloudflareBindings }>, 
  */
 export const applyCacheHeaders = (c: Context<{ Bindings: CloudflareBindings }>, maxAge = 86400): void => {
   c.header('Cache-Control', `public, max-age=${String(maxAge)}`);
+};
+
+export const createSuccessResponse = (data: JSONValue | {} | InvalidJSONValue) => {
+  return {
+    status: 200,
+    message: SUCCESS_MESSAGE,
+    data,
+  };
 };
