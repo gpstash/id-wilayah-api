@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "lokaid",
+	"name": "id-wilayah-api",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-04-20",
 	"observability": {
