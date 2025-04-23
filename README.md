@@ -41,7 +41,7 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 ### Install dependencies
 
 ```sh
-pnpm install
+bun install
 ```
 
 ### Prepare Data (Scripts)
@@ -69,13 +69,13 @@ bun scripts/validate-split-output.js [states|cities|districts|villages]
 ### Development
 
 ```sh
-pnpm run dev
+bun run dev
 ```
 
 ### Deploy
 
 ```sh
-pnpm run deploy
+bun run deploy
 ```
 
 ### Type Generation
@@ -83,13 +83,13 @@ pnpm run deploy
 For generating/synchronizing types based on your Worker configuration:
 
 ```sh
-pnpm run cf-typegen
+bun run cf-typegen
 ```
 
 ### Testing
 
 ```sh
-pnpm run test
+bun run test
 ```
 
 ---
@@ -99,8 +99,8 @@ pnpm run test
 Contributions are welcome! Please open issues or submit pull requests. Ensure your code follows the linting and formatting rules:
 
 ```sh
-pnpm run lint
-pnpm run lint:fix
+bun run lint
+bun run lint:fix
 ```
 
 ---
