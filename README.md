@@ -18,6 +18,7 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 - **Structured Responses**: Standardized JSON response format across all endpoints
 - **Fast**: Efficiently serves address data with minimal overhead
 - **Robust Error Handling**: Graceful error responses for all scenarios
+- **Dynamic Loading**: Only loads needed data files as required, optimizing memory usage and startup time
 
 ## Data Structure
 
@@ -104,6 +105,20 @@ bun run cf-typegen
 ```sh
 bun run test
 ```
+
+## Troubleshooting
+
+### Empty Responses
+
+If you encounter empty responses or "not found" errors when the data clearly exists:
+
+1. Verify that the data files (`states.json`, etc.) are properly loaded
+2. Check that the dynamic imports are working correctly
+3. Ensure that the test mocks match the actual data structure
+
+For deployment environments, make sure:
+- The static assets can be correctly accessed by the service
+- The path resolution for imports is correct for your environment
 
 ---
 

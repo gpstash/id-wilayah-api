@@ -15,35 +15,14 @@ import {
  */
 export class AddressService {
   /**
-   * Safely import a JSON file
-   * @param path Path to the JSON file
-   * @returns The imported data or null if import fails
-   */
-  private async safeImport(path: string): Promise<AddressResponse[] | null> {
-    try {
-      // Handle test patterns more gracefully
-      if (path.includes('99') || path.includes('00')) {
-        return null;
-      }
-      
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const mod = await import(/* @vite-ignore */ path);
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-      return mod.default;
-    } catch (error) {
-      console.error(`Error importing ${path}:`, error);
-      return null;
-    }
-  }
-  
-  /**
    * Get all states/provinces
    * @returns Promise with an array of states
    */
   async getAllStates(): Promise<AddressResponse[]> {
     try {
-      const data = await this.safeImport('../data/states.json');
-      return data ?? [];
+      // Load states data dynamically to allow testing
+      const statesData = await import('../data/states.json') as { default: AddressResponse[] };
+      return statesData.default;
     } catch (error) {
       console.error('Error loading states data:', error);
       return [];
@@ -83,8 +62,9 @@ export class AddressService {
     }
 
     try {
-      const data = await this.safeImport(`../data/cities/${stateCode}.json`);
-      return data ?? null;
+      // Use a type assertion for the dynamic import to avoid the 'any' type error
+      const cities = await import(`../data/cities/${stateCode}.json`) as { default: AddressResponse[] };
+      return cities.default;
     } catch (error) {
       console.error(`Error getting cities for state ${stateCode}:`, error);
       return null;
@@ -129,8 +109,9 @@ export class AddressService {
     }
 
     try {
-      const data = await this.safeImport(`../data/districts/${cityCode}.json`);
-      return data ?? null;
+      // Type assertion for dynamic import
+      const districts = await import(`../data/districts/${cityCode}.json`) as { default: AddressResponse[] };
+      return districts.default;
     } catch (error) {
       console.error(`Error getting districts for city ${cityCode}:`, error);
       return null;
@@ -175,8 +156,9 @@ export class AddressService {
     }
 
     try {
-      const data = await this.safeImport(`../data/villages/${districtCode}.json`);
-      return data ?? null;
+      // Type assertion for dynamic import
+      const villages = await import(`../data/villages/${districtCode}.json`) as { default: AddressResponse[] };
+      return villages.default;
     } catch (error) {
       console.error(`Error getting villages for district ${districtCode}:`, error);
       return null;

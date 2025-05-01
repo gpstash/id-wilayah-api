@@ -1,0 +1,181 @@
+import type { AddressResponse } from '../types';
+
+// Direct export of states data
+export const statesData: AddressResponse[] = [
+  {
+    'code': '11',
+    'value': 'ACEH',
+  },
+  {
+    'code': '12',
+    'value': 'SUMATERA UTARA',
+  },
+  {
+    'code': '13',
+    'value': 'SUMATERA BARAT',
+  },
+  {
+    'code': '14',
+    'value': 'RIAU',
+  },
+  {
+    'code': '15',
+    'value': 'JAMBI',
+  },
+  {
+    'code': '16',
+    'value': 'SUMATERA SELATAN',
+  },
+  {
+    'code': '17',
+    'value': 'BENGKULU',
+  },
+  {
+    'code': '18',
+    'value': 'LAMPUNG',
+  },
+  {
+    'code': '19',
+    'value': 'KEPULAUAN BANGKA BELITUNG',
+  },
+  {
+    'code': '21',
+    'value': 'KEPULAUAN RIAU',
+  },
+  {
+    'code': '31',
+    'value': 'DKI JAKARTA',
+  },
+  {
+    'code': '32',
+    'value': 'JAWA BARAT',
+  },
+  {
+    'code': '33',
+    'value': 'JAWA TENGAH',
+  },
+  {
+    'code': '34',
+    'value': 'DAERAH ISTIMEWA YOGYAKARTA',
+  },
+  {
+    'code': '35',
+    'value': 'JAWA TIMUR',
+  },
+  {
+    'code': '36',
+    'value': 'BANTEN',
+  },
+  {
+    'code': '51',
+    'value': 'BALI',
+  },
+  {
+    'code': '52',
+    'value': 'NUSA TENGGARA BARAT',
+  },
+  {
+    'code': '53',
+    'value': 'NUSA TENGGARA TIMUR',
+  },
+  {
+    'code': '61',
+    'value': 'KALIMANTAN BARAT',
+  },
+  {
+    'code': '62',
+    'value': 'KALIMANTAN TENGAH',
+  },
+  {
+    'code': '63',
+    'value': 'KALIMANTAN SELATAN',
+  },
+  {
+    'code': '64',
+    'value': 'KALIMANTAN TIMUR',
+  },
+  {
+    'code': '65',
+    'value': 'KALIMANTAN UTARA',
+  },
+  {
+    'code': '71',
+    'value': 'SULAWESI UTARA',
+  },
+  {
+    'code': '72',
+    'value': 'SULAWESI TENGAH',
+  },
+  {
+    'code': '73',
+    'value': 'SULAWESI SELATAN',
+  },
+  {
+    'code': '74',
+    'value': 'SULAWESI TENGGARA',
+  },
+  {
+    'code': '75',
+    'value': 'GORONTALO',
+  },
+  {
+    'code': '76',
+    'value': 'SULAWESI BARAT',
+  },
+  {
+    'code': '81',
+    'value': 'MALUKU',
+  },
+  {
+    'code': '82',
+    'value': 'MALUKU UTARA',
+  },
+  {
+    'code': '91',
+    'value': 'PAPUA',
+  },
+  {
+    'code': '92',
+    'value': 'PAPUA BARAT',
+  },
+  {
+    'code': '93',
+    'value': 'PAPUA SELATAN',
+  },
+  {
+    'code': '94',
+    'value': 'PAPUA TENGAH',
+  },
+  {
+    'code': '95',
+    'value': 'PAPUA PEGUNUNGAN',
+  },
+];
+
+// Jakarta city data
+export const jakartaCityData: AddressResponse[] = [
+  {
+    'code': '31.01',
+    'value': 'KAB. ADM. KEP. SERIBU',
+  },
+  {
+    'code': '31.71',
+    'value': 'KOTA ADM. JAKARTA PUSAT',
+  },
+  {
+    'code': '31.72',
+    'value': 'KOTA ADM. JAKARTA UTARA',
+  },
+  {
+    'code': '31.73',
+    'value': 'KOTA ADM. JAKARTA BARAT',
+  },
+  {
+    'code': '31.74',
+    'value': 'KOTA ADM. JAKARTA SELATAN',
+  },
+  {
+    'code': '31.75',
+    'value': 'KOTA ADM. JAKARTA TIMUR',
+  },
+]; 
