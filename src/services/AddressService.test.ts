@@ -5,25 +5,25 @@ import { AddressService } from './AddressService';
 vi.mock('../data/states.json', () => ({
   default: [
     { code: '31', value: 'DKI JAKARTA' },
-  ]
+  ],
 }));
 
 vi.mock('../data/cities/31.json', () => ({
   default: [
     { code: '31.74', value: 'JAKARTA SELATAN' },
-  ]
+  ],
 }));
 
 vi.mock('../data/districts/31.74.json', () => ({
   default: [
     { code: '31.74.04', value: 'PASAR MINGGU' },
-  ]
+  ],
 }));
 
 vi.mock('../data/villages/31.74.04.json', () => ({
   default: [
     { code: '31.74.04.1001', value: 'PASAR MINGGU' },
-  ]
+  ],
 }));
 
 // For testing error cases - Mock non-existent data with null instead of throwing errors

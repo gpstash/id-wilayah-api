@@ -5,7 +5,7 @@ import {
   isValidStateCode,
   isValidCityCode,
   isValidDistrictCode,
-  isValidVillageCode
+  isValidVillageCode,
 } from './validation';
 
 export const SUCCESS_MESSAGE = 'SUCCESS';
