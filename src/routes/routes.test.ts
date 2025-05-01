@@ -1,10 +1,11 @@
 import type { Hono } from 'hono';
-import { describe, it, expect, beforeAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import type { CloudflareBindings } from '../types';
 import { applyGlobalHandlers } from '../utils/appHandlers';
 import { createRoutes } from './index'; 
 
 let app: Hono<{Bindings: CloudflareBindings}>;
+let originalConsoleError: typeof console.error;
 
 // Type guard for objects with a 'data' property
 function hasDataProp(obj: unknown): obj is { data: unknown } {
@@ -29,8 +30,18 @@ function hasDataWithVersion(obj: unknown): obj is { status: unknown; data: { ver
 }
 
 beforeAll(() => {
+  // Save original console.error
+  originalConsoleError = console.error;
+  // Mock console.error to prevent logs in test output
+  console.error = vi.fn();
+
   app = createRoutes()
   applyGlobalHandlers(app);
+});
+
+afterAll(() => {
+  // Restore original console.error
+  console.error = originalConsoleError;
 });
 
 describe('API Integration: Address Routes', () => {
@@ -85,6 +96,30 @@ describe('API Integration: Address Routes', () => {
     ]);
   });
 
+  it('GET /states/:stateCode returns a single state', async () => {
+    const res = await app.request('/states/31');
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    let state: unknown;
+    if (hasDataProp(body)) {
+      state = body.data;
+    } else {
+      state = body;
+    }
+    expect(state).toEqual({ code: '31', value: 'DKI JAKARTA' });
+  });
+
+  it('GET /states/:stateCode returns 404 for not found', async () => {
+    const res = await app.request('/states/99');
+    expect(res.status).toBe(404);
+    const body = await res.json();
+    if (hasDataProp(body)) {
+      expect((body as { data: { error: string } }).data.error).toMatch(/not found/);
+    } else {
+      expect((body as { error: string }).error).toMatch(/not found/);
+    }
+  });
+
   it('GET /states/:stateCode/cities returns cities', async () => {
     const res = await app.request('/states/31/cities');
     expect(res.status).toBe(200);
@@ -105,8 +140,21 @@ describe('API Integration: Address Routes', () => {
     ]);
   });
 
-  it('GET /states/:stateCode/cities returns 404 for not found', async () => {
-    const res = await app.request('/states/99/cities');
+  it('GET /cities/:cityCode returns a single city', async () => {
+    const res = await app.request('/cities/31.74');
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    let city: unknown;
+    if (hasDataProp(body)) {
+      city = body.data;
+    } else {
+      city = body;
+    }
+    expect(city).toEqual({ code: '31.74', value: 'KOTA ADM. JAKARTA SELATAN' });
+  });
+
+  it('GET /cities/:cityCode returns 404 for not found', async () => {
+    const res = await app.request('/cities/99.99');
     expect(res.status).toBe(404);
     const body = await res.json();
     if (hasDataProp(body)) {
@@ -140,8 +188,21 @@ describe('API Integration: Address Routes', () => {
     ]);
   });
 
-  it('GET /cities/:cityCode/districts returns 404 for not found', async () => {
-    const res = await app.request('/cities/99.99/districts');
+  it('GET /districts/:districtCode returns a single district', async () => {
+    const res = await app.request('/districts/31.74.04');
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    let district: unknown;
+    if (hasDataProp(body)) {
+      district = body.data;
+    } else {
+      district = body;
+    }
+    expect(district).toEqual({ code: '31.74.04', value: 'Pasar Minggu' });
+  });
+
+  it('GET /districts/:districtCode returns 404 for not found', async () => {
+    const res = await app.request('/districts/99.99.99');
     expect(res.status).toBe(404);
     const body = await res.json();
     if (hasDataProp(body)) {
@@ -172,8 +233,21 @@ describe('API Integration: Address Routes', () => {
     ]);
   });
 
-  it('GET /districts/:districtCode/villages returns 404 for not found', async () => {
-    const res = await app.request('/districts/99.99.99/villages');
+  it('GET /villages/:villageCode returns a single village', async () => {
+    const res = await app.request('/villages/31.74.04.1001');
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    let village: unknown;
+    if (hasDataProp(body)) {
+      village = body.data;
+    } else {
+      village = body;
+    }
+    expect(village).toEqual({ code: '31.74.04.1001', value: 'Pasar Minggu' });
+  });
+
+  it('GET /villages/:villageCode returns 404 for not found', async () => {
+    const res = await app.request('/villages/99.99.99.9999');
     expect(res.status).toBe(404);
     const body = await res.json();
     if (hasDataProp(body)) {

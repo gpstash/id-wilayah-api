@@ -12,6 +12,13 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 
 [Use the API](https://lokaid.gilangpratama.id)
 
+## Features
+
+- **Secure**: Protected against directory traversal attacks with strict input validation
+- **Structured Responses**: Standardized JSON response format across all endpoints
+- **Fast**: Efficiently serves address data with minimal overhead
+- **Robust Error Handling**: Graceful error responses for all scenarios
+
 ## Data Structure
 
 - The address data files (`states.json`, `cities/*.json`, `districts/*.json`, `villages/*.json`) only include `code` and `value` for each state, city, district, and village.
@@ -19,9 +26,13 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 ## Available Endpoints
 
 - `GET /states` — List all provinces (states)
+- `GET /states/:stateCode` — Get province details by code
 - `GET /states/:stateCode/cities` — List all cities/regencies in a province
+- `GET /cities/:cityCode` — Get city/regency details by code
 - `GET /cities/:cityCode/districts` — List all districts in a city/regency
+- `GET /districts/:districtCode` — Get district details by code
 - `GET /districts/:districtCode/villages` — List all villages in a district
+- `GET /villages/:villageCode` — Get village details by code
 - `GET /health` — Health check for the API
 
 ---

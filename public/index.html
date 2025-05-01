@@ -116,9 +116,13 @@
       <h2>Endpoint Tersedia</h2>
       <ul class="endpoint-list">
         <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— Daftar semua provinsi</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode</code> <span style="color:#666">— Detail provinsi berdasarkan kode</span></li>
         <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— Daftar semua kota/kabupaten di provinsi</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode</code> <span style="color:#666">— Detail kota/kabupaten berdasarkan kode</span></li>
         <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— Daftar semua kecamatan di kota/kabupaten</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode</code> <span style="color:#666">— Detail kecamatan berdasarkan kode</span></li>
         <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— Daftar semua desa di kecamatan</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/villages/:villageCode</code> <span style="color:#666">— Detail desa berdasarkan kode</span></li>
       </ul>
       <div class="howto">
         <h2>Cara Pakai</h2>
@@ -153,9 +157,13 @@
           <label for="endpoint">Endpoint</label>
           <select id="endpoint" name="endpoint">
             <option value="states">/states</option>
+            <option value="state">/states/31</option>
             <option value="cities">/states/31/cities</option>
+            <option value="city">/cities/31.74</option>
             <option value="districts">/cities/31.74/districts</option>
+            <option value="district">/districts/31.74.04</option>
             <option value="villages">/districts/31.74.04/villages</option>
+            <option value="village">/villages/31.74.04.1001</option>
           </select>
           <button type="submit">Kirim Request</button>
         </form>
@@ -171,9 +179,13 @@
       <h2>Available Endpoints</h2>
       <ul class="endpoint-list">
         <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— List all provinces (states)</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode</code> <span style="color:#666">— Get province details by code</span></li>
         <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— List all cities/regencies in a province</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode</code> <span style="color:#666">— Get city/regency details by code</span></li>
         <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— List all districts in a city/regency</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode</code> <span style="color:#666">— Get district details by code</span></li>
         <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— List all villages in a district</span></li>
+        <li class="endpoint"><span class="method">GET</span> <code>/villages/:villageCode</code> <span style="color:#666">— Get village details by code</span></li>
       </ul>
       <div class="howto">
         <h2>How to Use</h2>
@@ -208,9 +220,13 @@
           <label for="endpoint-en">Endpoint</label>
           <select id="endpoint-en" name="endpoint">
             <option value="states">/states</option>
+            <option value="state">/states/31</option>
             <option value="cities">/states/31/cities</option>
+            <option value="city">/cities/31.74</option>
             <option value="districts">/cities/31.74/districts</option>
+            <option value="district">/districts/31.74.04</option>
             <option value="villages">/districts/31.74.04/villages</option>
+            <option value="village">/villages/31.74.04.1001</option>
           </select>
           <button type="submit">Send Request</button>
         </form>
@@ -247,9 +263,13 @@
     const responseBoxID = document.getElementById('response');
     const endpoints = {
       'states': '/states',
+      'state': '/states/31',
       'cities': '/states/31/cities',
+      'city': '/cities/31.74',
       'districts': '/cities/31.74/districts',
-      'villages': '/districts/31.74.04/villages'
+      'district': '/districts/31.74.04',
+      'villages': '/districts/31.74.04/villages',
+      'village': '/villages/31.74.04.1001'
     }
     formID.addEventListener('submit', async (e) => {
       e.preventDefault();
