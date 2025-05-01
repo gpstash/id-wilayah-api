@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { AddressService } from './AddressService';
+import { AddressService } from '.';
 
 // Mock the dynamic imports
 vi.mock('../data/states.json', () => ({
@@ -93,15 +93,12 @@ describe('AddressService', () => {
     it('returns null for invalid state code format', async () => {
       vi.spyOn(console, 'error').mockImplementation(() => {});
       
-      // Invalid formats
-      expect(await service.getState('')).toBeNull();
-      expect(await service.getState('3')).toBeNull();
-      expect(await service.getState('311')).toBeNull();
-      expect(await service.getState('3a')).toBeNull();
-      expect(await service.getState('31.74')).toBeNull();
-      expect(await service.getState('../31')).toBeNull();
-      expect(await service.getState('../../etc/passwd')).toBeNull();
-      expect(await service.getState('<script>')).toBeNull();
+      // Invalid formats - these should throw errors that we catch and test
+      for (const invalidCode of ['', '3', '311', '3a', '31.74', '../31', '../../etc/passwd', '<script>']) {
+        await expect(async () => {
+          await service.getState(invalidCode);
+        }).rejects.toThrow(`Invalid state code: ${invalidCode}`);
+      }
     });
   });
 

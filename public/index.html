@@ -3,35 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="keywords" content="API wilayah Indonesia, API provinsi, API kota, API kabupaten, API kecamatan, API desa, API data wilayah, API validasi alamat, API data administrasi Indonesia, API pengembang Indonesia, API backend Indonesia, API frontend Indonesia, API lokasi Indonesia, API data wilayah terbaru, API gratis Indonesia, API JSON wilayah, API integrasi alamat, API aplikasi Indonesia, API sistem informasi, API e-commerce, API fintech, API logistik, API edukasi, API startup, API untuk developer, API untuk programmer, API untuk engineer, API untuk software developer, API untuk data scientist, API untuk integrator" />
-  <meta name="last-modified" content="2025-04-22T00:00:23+07:00" />
+  <meta name="keywords" content="API wilayah Indonesia, API provinsi, API kota, API kabupaten, API kecamatan, API desa, API data wilayah, API validasi alamat, API data administrasi Indonesia, API pengembang Indonesia, API REST wilayah, API gRPC wilayah, data lokasi Indonesia, kode pos Indonesia, wilayah administrasi, PPDB, validasi alamat, JSON wilayah, Protocol Buffer wilayah" />
+  <meta name="last-modified" content="2025-05-01T00:00:00+07:00" />
   <title>LokaID – API Wilayah Administratif Indonesia untuk Developer</title>
-  <meta name="description" content="LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru dan terstruktur untuk developer. Cocok untuk validasi alamat, integrasi data, dan aplikasi yang membutuhkan data wilayah Indonesia terkini. Eksplor dokumentasi, playground, dan contoh integrasi." />
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru via REST dan gRPC. Solusi lengkap untuk validasi alamat, integrasi data lokasi, dan verifikasi wilayah Indonesia. Gratis, cepat, dan mudah digunakan oleh developer." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://lokaid.gilangpratama.id/" />
-  <meta name="author" content="gpstash" />
+  <meta name="author" content="Gilang Pratama" />
   <meta name="theme-color" content="#0061f2" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="manifest" href="/manifest.json" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/" />
   <link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/" />
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lokaid.gilangpratama.id/" />
   <meta property="og:title" content="LokaID – API Wilayah Administratif Indonesia untuk Developer" />
-  <meta property="og:description" content="LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru dan terstruktur untuk developer. Cocok untuk validasi alamat, integrasi data, dan aplikasi yang membutuhkan data wilayah Indonesia terkini." />
+  <meta property="og:description" content="LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru via REST dan gRPC. Solusi lengkap untuk validasi alamat, integrasi data lokasi, dan verifikasi wilayah Indonesia. Gratis, cepat, dan mudah digunakan oleh developer." />
   <meta property="og:site_name" content="LokaID" />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content="https://lokaid.gilangpratama.id/images/LokaID-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://lokaid.gilangpratama.id/" />
   <meta name="twitter:title" content="LokaID – API Wilayah Administratif Indonesia untuk Developer" />
-  <meta name="twitter:description" content="LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru dan terstruktur untuk developer. Cocok untuk validasi alamat, integrasi data, dan aplikasi yang membutuhkan data wilayah Indonesia terkini." />
-  <meta name="twitter:image" content="/og-image.png" />
+  <meta name="twitter:description" content="LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) terbaru via REST dan gRPC. Solusi lengkap untuk validasi alamat, integrasi data lokasi, dan verifikasi wilayah Indonesia. Gratis, cepat, dan mudah digunakan oleh developer." />
+  <meta name="twitter:image" content="https://lokaid.gilangpratama.id/images/LokaID-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0061f2;
@@ -45,40 +48,54 @@
     }
     html, body {
       margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 17px;
+      line-height: 1.6;
     }
     .container {
-      max-width: 800px; margin: 48px auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 40px 32px 32px 32px;
+      max-width: 960px; margin: 48px auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 40px 32px 32px 32px;
     }
     h1, h2, h3 { margin-top: 0; font-weight: 600; }
-    h1 { font-size: 2.3rem; letter-spacing: -1px; }
-    h2 { margin-top: 2.5rem; font-size: 1.3rem; border-left: 4px solid var(--primary); padding-left: 0.7em; }
-    .badge { display: inline-block; background: var(--primary); color: var(--white); border-radius: 20px; padding: 2px 14px; font-size: 0.95em; margin-bottom: 18px; letter-spacing: 0.5px; }
-    .desc { color: #4b5563; margin-bottom: 1.5em; }
+    h1 { font-size: 2.5rem; letter-spacing: -1px; }
+    h2 { margin-top: 2.5rem; font-size: 1.6rem; border-left: 4px solid var(--primary); padding-left: 0.7em; }
+    .subtitle { font-size: 1.2rem; color: #4b5563; margin-top: -0.5rem; margin-bottom: 2rem; }
+    .badge { display: inline-block; background: var(--primary); color: var(--white); border-radius: 20px; padding: 2px 14px; font-size: 0.95em; letter-spacing: 0.5px; }
+    .desc { color: #4b5563; }
     .logo { display: block; max-width: 130px; width: 100%; height: auto; }
-    .endpoint-list { list-style: none; padding: 0; }
-    .endpoint { margin-bottom: 1.2em; }
-    .endpoint .method { font-weight: 600; color: var(--primary); margin-right: 8px; }
-    code, pre { background: var(--code-bg); border-radius: 6px; font-size: 0.97em; }
-    code { padding: 2px 7px; }
-    pre { padding: 15px 18px; overflow-x: auto; }
-    .howto, .example, .test { margin-bottom: 2.5em; }
-    .test-form { background: var(--code-bg); border-radius: 8px; padding: 18px 18px 12px 18px; margin-top: 1em; }
-    .test-form label { display: block; margin-bottom: 0.5em; font-weight: 500; }
-    .test-form input, .test-form select {
-      width: 100%; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--gray); margin-bottom: 1.2em; font-size: 1em;
+    .hero-section { text-align: center; margin-bottom: 3rem; }
+    .features { display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 3rem; }
+    .feature-card { 
+      flex: 1 1 280px; 
+      background: var(--white); 
+      border-radius: var(--radius); 
+      padding: 1.5rem; 
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      text-decoration: none;
+      color: var(--text);
     }
-    .test-form button {
-      background: var(--primary); color: var(--white); border: none; border-radius: 6px; padding: 8px 18px; font-size: 1em; font-weight: 600; cursor: pointer;
-      box-shadow: 0 1px 3px 0 rgba(0,0,0,0.03);
-      transition: background 0.15s;
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
     }
-    .test-form button:hover { background: #004bb5; }
-    .response-box {
-      margin-top: 1.3em; background: var(--white); border: 1px solid var(--gray); border-radius: 7px; padding: 12px 15px; font-size: 0.98em; color: #0b3a2f;
-      font-family: 'Fira Mono', 'Consolas', monospace; white-space: pre-wrap; word-break: break-all;
+    .feature-card h3 {
+      color: var(--primary);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feature-card p {
+      margin-bottom: 0;
+    }
+    .feature-card svg {
+      width: 24px;
+      height: 24px;
     }
     .lang-toggle {
       cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: all 0.15s ease;
     }
     .lang-toggle[aria-pressed="true"] {
       background: var(--primary);
@@ -91,9 +108,55 @@
       color: var(--primary);
       border: 2px solid var(--gray);
     }
+    code {
+      background: var(--code-bg);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: monospace;
+    }
+    .quick-example {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 1.5rem 0;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 12px 24px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+    .primary-button {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 4px 6px rgba(0,97,242,0.12);
+    }
+    .primary-button:hover {
+      background: #004bb5;
+      transform: translateY(-2px);
+    }
+    .secondary-button {
+      background: var(--white);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .secondary-button:hover {
+      background: #f0f7ff;
+      transform: translateY(-2px);
+    }
     @media (max-width: 600px) {
-      .container { padding: 16px 2vw; }
-      pre { padding: 10px 5vw; }
+      .container { margin: 16px auto; padding: 24px 16px; }
+      h1 { font-size: 2rem; }
+      .features { gap: 1rem; }
     }
   </style>
 </head>
@@ -102,258 +165,233 @@
     <div style="display:flex; justify-content:space-between; align-items:center">
       <img src="/images/LokaID-logo.png" alt="LokaID Logo" class="logo" style="margin-left:0;" />
       <div style="display:flex;gap:8px;">
-        <button id="lang-id" aria-pressed="true" class="lang-toggle" style="font-weight:bold;">🇮🇩 Bahasa</button>
+        <button id="lang-id" aria-pressed="true" class="lang-toggle">🇮🇩 Bahasa</button>
         <button id="lang-en" aria-pressed="false" class="lang-toggle">🇺🇸 English</button>
       </div>
     </div>
     <hr style="border:none;border-top:1.5px solid #e5e7eb;margin:18px 0 28px 0;" />
+    
+    <!-- Indonesian Content -->
     <div id="content-id" lang="id">
-      <h1>Dokumentasi & Playground API</h1>
-      <div class="desc">
-        API sederhana untuk data wilayah administrasi Indonesia: provinsi, kota/kabupaten, kecamatan, dan desa.<br>
-        Dibuat untuk developer yang membutuhkan data wilayah terstruktur dan terbaru untuk form, dashboard, atau validasi alamat.
+      <div class="hero-section">
+        <h1>LokaID API</h1>
+        <p class="subtitle">Data Wilayah Indonesia untuk Developer</p>
+        <div class="badge">Versi 1.0.0</div>
       </div>
-      <h2>Endpoint Tersedia</h2>
-      <ul class="endpoint-list">
-        <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— Daftar semua provinsi</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode</code> <span style="color:#666">— Detail provinsi berdasarkan kode</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— Daftar semua kota/kabupaten di provinsi</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode</code> <span style="color:#666">— Detail kota/kabupaten berdasarkan kode</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— Daftar semua kecamatan di kota/kabupaten</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode</code> <span style="color:#666">— Detail kecamatan berdasarkan kode</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— Daftar semua desa di kecamatan</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/villages/:villageCode</code> <span style="color:#666">— Detail desa berdasarkan kode</span></li>
+      
+      <p class="desc">
+        LokaID menyediakan API data wilayah administrasi Indonesia (provinsi, kota/kabupaten, kecamatan, dan desa) 
+        yang lengkap, terstruktur, dan mudah diintegrasikan. Ideal untuk validasi alamat, form, dashboard, 
+        atau aplikasi yang membutuhkan data lokasi Indonesia terkini.
+      </p>
+      
+      <div class="quick-example">
+        <strong>Contoh:</strong>
+        <pre>// GET daftar provinsi
+fetch('https://lokaid.gilangpratama.id/states')
+  .then(res => res.json())
+  .then(data => console.log(data));</pre>
+      </div>
+      
+      <div class="features">
+        <a href="/docs/rest/" class="feature-card">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            REST API
+          </h3>
+          <p>Akses data wilayah Indonesia melalui RESTful API dengan format JSON yang sederhana. Mendukung GET requests untuk semua level wilayah administratif.</p>
+        </a>
+        
+        <a href="/docs/grpc/" class="feature-card">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            gRPC API
+          </h3>
+          <p>Performa lebih cepat dan efisien dengan gRPC API. Ideal untuk aplikasi dengan kebutuhan throughput tinggi atau lingkungan dengan bandwidth terbatas.</p>
+        </a>
+      </div>
+      
+      <h2>Fitur Utama</h2>
+      <ul>
+        <li><strong>Data Lengkap</strong> — Mencakup semua provinsi, kota/kabupaten, kecamatan, dan desa di Indonesia</li>
+        <li><strong>Performa Tinggi</strong> — Dioptimalkan untuk respons cepat dan beban server ringan</li>
+        <li><strong>Dual Protocol</strong> — Pilihan antara REST API dan gRPC sesuai kebutuhan</li>
+        <li><strong>Aman</strong> — Diproteksi dari serangan directory traversal, validasi input ketat</li>
+        <li><strong>Dokumentasi Lengkap</strong> — Panduan, contoh kode, dan sandbox interaktif</li>
       </ul>
-      <div class="howto">
-        <h2>Cara Pakai</h2>
-        <p>Kirim <b>GET</b> request ke endpoint yang diinginkan. Contoh menggunakan <code>curl</code>:</p>
-        <pre>curl https://lokaid.gilangpratama.id/states</pre>
-        <p>Atau dari JavaScript:</p>
-        <pre>fetch('https://lokaid.gilangpratama.id/states')
-  .then(r => r.json())
-  .then(console.log);</pre>
-      </div>
-      <div class="example">
-        <h2>Contoh Response</h2>
-        <pre>{
-  "status": 200,
-  "message": "SUCCESS",
-  "data":[
-    {
-      "code": "11",
-      "value": "ACEH"
-    },
-    {
-      "code": "12",
-      "value": "SUMATERA UTARA"
-    },
-    ...
-  ]
-}</pre>
-      </div>
-      <div class="test">
-        <h2>Coba Endpoint</h2>
-        <form class="test-form" id="api-tester">
-          <label for="endpoint">Endpoint</label>
-          <select id="endpoint" name="endpoint">
-            <option value="states">/states</option>
-            <option value="state">/states/31</option>
-            <option value="cities">/states/31/cities</option>
-            <option value="city">/cities/31.74</option>
-            <option value="districts">/cities/31.74/districts</option>
-            <option value="district">/districts/31.74.04</option>
-            <option value="villages">/districts/31.74.04/villages</option>
-            <option value="village">/villages/31.74.04.1001</option>
-          </select>
-          <button type="submit">Kirim Request</button>
-        </form>
-        <div id="response" class="response-box" style="display:none"></div>
-      </div>
     </div>
+    
+    <!-- English Content -->
     <div id="content-en" lang="en" style="display:none">
-      <h1>API Documentation & Playground</h1>
-      <div class="desc">
-        A simple API for Indonesian wilayah (administrative region) data—provinces, cities, districts, villages.<br>
-        Built for developers who need up-to-date, structured wilayah info for forms, dashboards, or address validation.
+      <div class="hero-section">
+        <h1>LokaID API</h1>
+        <p class="subtitle">Indonesian Region Data for Developers</p>
+        <div class="badge">Version 1.0.0</div>
       </div>
-      <h2>Available Endpoints</h2>
-      <ul class="endpoint-list">
-        <li class="endpoint"><span class="method">GET</span> <code>/states</code> <span style="color:#666">— List all provinces (states)</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode</code> <span style="color:#666">— Get province details by code</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/states/:stateCode/cities</code> <span style="color:#666">— List all cities/regencies in a province</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode</code> <span style="color:#666">— Get city/regency details by code</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/cities/:cityCode/districts</code> <span style="color:#666">— List all districts in a city/regency</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode</code> <span style="color:#666">— Get district details by code</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/districts/:districtCode/villages</code> <span style="color:#666">— List all villages in a district</span></li>
-        <li class="endpoint"><span class="method">GET</span> <code>/villages/:villageCode</code> <span style="color:#666">— Get village details by code</span></li>
+      
+      <p class="desc">
+        LokaID provides a comprehensive, structured, and easily integrated API for Indonesian administrative regions 
+        (provinces, cities/regencies, districts, and villages). Ideal for address validation, forms, dashboards, 
+        or applications that require up-to-date Indonesian location data.
+      </p>
+      
+      <div class="quick-example">
+        <strong>Example:</strong>
+        <pre>// GET list of provinces
+fetch('https://lokaid.gilangpratama.id/states')
+  .then(res => res.json())
+  .then(data => console.log(data));</pre>
+      </div>
+      
+      <div class="features">
+        <a href="/docs/rest/?lang=en" class="feature-card">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            REST API
+          </h3>
+          <p>Access Indonesian region data via a RESTful API with simple JSON formatting. Supports GET requests for all administrative region levels.</p>
+        </a>
+        
+        <a href="/docs/grpc/?lang=en" class="feature-card">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            gRPC API
+          </h3>
+          <p>Faster and more efficient performance with gRPC API. Ideal for applications with high throughput requirements or bandwidth-constrained environments.</p>
+        </a>
+      </div>
+      
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Complete Data</strong> — Covers all provinces, cities/regencies, districts, and villages in Indonesia</li>
+        <li><strong>High Performance</strong> — Optimized for fast responses and low server load</li>
+        <li><strong>Dual Protocol</strong> — Choose between REST API and gRPC based on your needs</li>
+        <li><strong>Secure</strong> — Protected against directory traversal attacks, strict input validation</li>
+        <li><strong>Comprehensive Documentation</strong> — Guides, code examples, and interactive sandbox</li>
       </ul>
-      <div class="howto">
-        <h2>How to Use</h2>
-        <p>Simply send a <b>GET</b> request to the desired endpoint. Example using <code>curl</code>:</p>
-        <pre>curl https://lokaid.gilangpratama.id/states</pre>
-        <p>Or from JavaScript:</p>
-        <pre>fetch('https://lokaid.gilangpratama.id/states')
-  .then(r => r.json())
-  .then(console.log);</pre>
-      </div>
-      <div class="example">
-        <h2>Example Response</h2>
-        <pre>{
-  "status": 200,
-  "message": "SUCCESS",
-  "data":[
-    {
-      "code": "11",
-      "value": "ACEH"
-    },
-    {
-      "code": "12",
-      "value": "SUMATERA UTARA"
-    },
-    ...
-  ]
-}</pre>
-      </div>
-      <div class="test">
-        <h2>Test an Endpoint</h2>
-        <form class="test-form" id="api-tester-en">
-          <label for="endpoint-en">Endpoint</label>
-          <select id="endpoint-en" name="endpoint">
-            <option value="states">/states</option>
-            <option value="state">/states/31</option>
-            <option value="cities">/states/31/cities</option>
-            <option value="city">/cities/31.74</option>
-            <option value="districts">/cities/31.74/districts</option>
-            <option value="district">/districts/31.74.04</option>
-            <option value="villages">/districts/31.74.04/villages</option>
-            <option value="village">/villages/31.74.04.1001</option>
-          </select>
-          <button type="submit">Send Request</button>
-        </form>
-        <div id="response-en" class="response-box" style="display:none"></div>
-      </div>
     </div>
   </div>
+  
+  <footer style="margin-top:48px; margin-bottom:48px; text-align:center; color:#6b7280; font-size:1em;">
+    <span>Built with <span style="color:#e25555;">&#10084;&#65039;</span> by Gilang &mdash; <a href="https://ko-fi.com/gpstash" target="_blank" rel="noopener" style="color:#0061f2;text-decoration:none;font-weight:600;">Support on Ko-fi</a>
+    <br />
+    <a href="https://github.com/gpstash/lokaid" target="_blank" rel="noopener" style="color:#22292f;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="vertical-align:middle;"><path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.186 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.31.678.921.678 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.58.688.482C19.138 20.205 22 16.447 22 12.021 22 6.484 17.523 2 12 2Z"></path></svg> <span>GitHub 🚀</span></a></span>
+  </footer>
+  
   <script>
     // Language switcher
     const btnID = document.getElementById('lang-id');
     const btnEN = document.getElementById('lang-en');
     const contentID = document.getElementById('content-id');
     const contentEN = document.getElementById('content-en');
-    btnID.onclick = function() {
+    
+    // Check URL for language preference
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    
+    if (langParam === 'en') {
+      setEnglish();
+    } else {
+      setIndonesian();
+    }
+    
+    function setIndonesian() {
       btnID.setAttribute('aria-pressed', 'true');
       btnEN.setAttribute('aria-pressed', 'false');
       contentID.style.display = '';
       contentEN.style.display = 'none';
       document.documentElement.lang = 'id';
-      btnID.classList.add('active');
-      btnEN.classList.remove('active');
-    };
-    btnEN.onclick = function() {
+    }
+    
+    function setEnglish() {
       btnID.setAttribute('aria-pressed', 'false');
       btnEN.setAttribute('aria-pressed', 'true');
       contentID.style.display = 'none';
       contentEN.style.display = '';
       document.documentElement.lang = 'en';
-      btnEN.classList.add('active');
-      btnID.classList.remove('active');
-    };
-    // API tester ID
-    const formID = document.getElementById('api-tester');
-    const responseBoxID = document.getElementById('response');
-    const endpoints = {
-      'states': '/states',
-      'state': '/states/31',
-      'cities': '/states/31/cities',
-      'city': '/cities/31.74',
-      'districts': '/cities/31.74/districts',
-      'district': '/districts/31.74.04',
-      'villages': '/districts/31.74.04/villages',
-      'village': '/villages/31.74.04.1001'
     }
-    formID.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      responseBoxID.style.display = 'none';
-      responseBoxID.textContent = '';
-      const baseUrl = '';
-      const endpoint = formID['endpoint'].value;
-      const url = baseUrl + endpoints[endpoint];
-      responseBoxID.textContent = 'Memuat...';
-      responseBoxID.style.display = 'block';
-      try {
-        const res = await fetch(url);
-        const text = await res.text();
-        try {
-          responseBoxID.textContent = JSON.stringify(JSON.parse(text), null, 2);
-        } catch {
-          responseBoxID.textContent = text;
-        }
-      } catch (err) {
-        responseBoxID.textContent = 'Permintaan gagal: ' + err;
-      }
-    });
-    // API tester EN
-    const formEN = document.getElementById('api-tester-en');
-    const responseBoxEN = document.getElementById('response-en');
-    formEN.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      responseBoxEN.style.display = 'none';
-      responseBoxEN.textContent = '';
-      const baseUrl = 'https://lokaid.gilangpratama.id';
-      const endpoint = formEN['endpoint-en'].value;
-      const url = baseUrl + endpoints[endpoint];
-      responseBoxEN.textContent = 'Loading...';
-      responseBoxEN.style.display = 'block';
-      try {
-        const res = await fetch(url);
-        const text = await res.text();
-        try {
-          responseBoxEN.textContent = JSON.stringify(JSON.parse(text), null, 2);
-        } catch {
-          responseBoxEN.textContent = text;
-        }
-      } catch (err) {
-        responseBoxEN.textContent = 'Request failed: ' + err;
-      }
-    });
     
+    btnID.onclick = function() {
+      setIndonesian();
+      history.replaceState({}, '', window.location.pathname);
+    };
+    
+    btnEN.onclick = function() {
+      setEnglish();
+      history.replaceState({}, '', window.location.pathname + '?lang=en');
+    };
   </script>
-  <!-- Google tag (gtag.js) -->
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "LokaID API",
+      "url": "https://lokaid.gilangpratama.id/",
+      "description": "API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) tersedia dalam REST dan gRPC. Solusi lengkap untuk validasi alamat, integrasi data lokasi, dan verifikasi wilayah Indonesia. Gratis, cepat, dan mudah digunakan oleh developer.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Gilang Pratama",
+        "url": "https://github.com/gpstash"
+      },
+      "sameAs": [
+        "https://github.com/gpstash/lokaid"
+      ],
+      "keywords": "API wilayah Indonesia, REST API, gRPC API, data provinsi, data kota, data kabupaten, data kecamatan, data desa, validasi alamat",
+      "availableLanguage": ["Indonesian", "English"],
+      "license": "https://github.com/gpstash/lokaid/blob/main/LICENSE",
+      "datePublished": "2025-05-01T00:00:00+07:00",
+      "dateModified": "2025-05-01T00:00:00+07:00",
+      "potentialAction": {
+        "@type": "UseAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://lokaid.gilangpratama.id/states"
+        },
+        "expectsAcceptanceOf": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "IDR"
+        }
+      },
+      "provider": {
+        "@type": "Person",
+        "name": "Gilang Pratama",
+        "url": "https://github.com/gpstash"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://lokaid.gilangpratama.id/"
+      }
+    }
+  </script>
+  
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JFYMC15D7Z"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-JFYMC15D7Z');
   </script>
+  
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "38aaf1a797164c718bb226aa006dadf6"}'></script>
-  <!-- End Cloudflare Web Analytics -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "ID Wilayah API",
-      "operatingSystem": "All",
-      "applicationCategory": "WebAPI",
-      "description": "Up-to-date, structured Indonesian administrative region data API for developers. Provinces, cities, districts, villages.",
-      "url": "https://lokaid.gilangpratama.id/",
-      "author": {
-        "@type": "Person",
-        "name": "Gilang Pratama Putra"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "IDR"
-      }
-    }
-  </script>
-  <footer style="margin-top:48px; margin-bottom:48px; text-align:center; color:#6b7280; font-size:1em;">
-    <span>Built with <span style="color:#e25555;">&#10084;&#65039;</span> by Gilang &mdash; <a href="https://ko-fi.com/gpstash" target="_blank" rel="noopener" style="color:#0061f2;text-decoration:none;font-weight:600;">Support on Ko-fi</a>
-    <br />
-    <a href="https://github.com/gpstash/lokaid" target="_blank" rel="noopener" style="color:#22292f;text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" style="vertical-align:middle;"><path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.186 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.31.678.921.678 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.58.688.482C19.138 20.205 22 16.447 22 12.021 22 6.484 17.523 2 12 2Z"></path></svg> <span>GitHub 🚀</span></a></span>
-  </footer>
 </body>
 </html>

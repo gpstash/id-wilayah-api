@@ -1,0 +1,135 @@
+syntax = "proto3";
+
+package lokaid;
+
+// Address data structure
+message AddressData {
+  string code = 1;
+  string value = 2;
+}
+
+// Request for getting all states
+message GetAllStatesRequest {}
+
+// Response for getting all states
+message GetAllStatesResponse {
+  repeated AddressData states = 1;
+}
+
+// Request for getting a specific state
+message GetStateRequest {
+  string state_code = 1;
+}
+
+// Response for getting a specific state
+message GetStateResponse {
+  AddressData state = 1;
+}
+
+// Request for getting cities in a state
+message GetCitiesInStateRequest {
+  string state_code = 1;
+}
+
+// Response for getting cities in a state
+message GetCitiesInStateResponse {
+  repeated AddressData cities = 1;
+}
+
+// Request for getting a specific city
+message GetCityRequest {
+  string city_code = 1;
+}
+
+// Response for getting a specific city
+message GetCityResponse {
+  AddressData city = 1;
+}
+
+// Request for getting districts in a city
+message GetDistrictsInCityRequest {
+  string city_code = 1;
+}
+
+// Response for getting districts in a city
+message GetDistrictsInCityResponse {
+  repeated AddressData districts = 1;
+}
+
+// Request for getting a specific district
+message GetDistrictRequest {
+  string district_code = 1;
+}
+
+// Response for getting a specific district
+message GetDistrictResponse {
+  AddressData district = 1;
+}
+
+// Request for getting villages in a district
+message GetVillagesInDistrictRequest {
+  string district_code = 1;
+}
+
+// Response for getting villages in a district
+message GetVillagesInDistrictResponse {
+  repeated AddressData villages = 1;
+}
+
+// Request for getting a specific village
+message GetVillageRequest {
+  string village_code = 1;
+}
+
+// Response for getting a specific village
+message GetVillageResponse {
+  AddressData village = 1;
+}
+
+// Health check request
+message HealthCheckRequest {}
+
+// Health check response
+message HealthCheckResponse {
+  string status = 1;
+  string version = 2;
+  string timestamp = 3;
+}
+
+// Error response
+message ErrorResponse {
+  string error = 1;
+  int32 status = 2;
+  string timestamp = 3;
+  string path = 4;
+}
+
+// Address Service
+service AddressService {
+  // Get all states/provinces
+  rpc GetAllStates(GetAllStatesRequest) returns (GetAllStatesResponse);
+  
+  // Get a specific state by its code
+  rpc GetState(GetStateRequest) returns (GetStateResponse);
+  
+  // Get all cities in a state
+  rpc GetCitiesInState(GetCitiesInStateRequest) returns (GetCitiesInStateResponse);
+  
+  // Get a specific city by its code
+  rpc GetCity(GetCityRequest) returns (GetCityResponse);
+  
+  // Get all districts in a city
+  rpc GetDistrictsInCity(GetDistrictsInCityRequest) returns (GetDistrictsInCityResponse);
+  
+  // Get a specific district by its code
+  rpc GetDistrict(GetDistrictRequest) returns (GetDistrictResponse);
+  
+  // Get all villages in a district
+  rpc GetVillagesInDistrict(GetVillagesInDistrictRequest) returns (GetVillagesInDistrictResponse);
+  
+  // Get a specific village by its code
+  rpc GetVillage(GetVillageRequest) returns (GetVillageResponse);
+  
+  // Health check
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+} 

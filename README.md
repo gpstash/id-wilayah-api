@@ -36,6 +36,133 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 - `GET /villages/:villageCode` — Get village details by code
 - `GET /health` — Health check for the API
 
+## gRPC Support
+
+This project now supports both REST and gRPC APIs for accessing location data. The gRPC implementation is designed to be compatible with Cloudflare Workers and provides the same functionality as the REST API.
+
+### gRPC Endpoint
+
+The gRPC service is available at:
+
+```
+https://lokaid.gilangpratama.id/grpc/{method}
+```
+
+The API uses a simplified endpoint structure with direct method calls, making it more intuitive and easier to use than traditional gRPC implementations.
+
+### Flexible Content Types
+
+The gRPC API supports multiple ways to send requests:
+
+1. **JSON over HTTP**: Send requests with `Content-Type: application/json` for standard JSON handling
+2. **JSON with gRPC Content Type**: Send JSON payloads with `Content-Type: application/grpc+proto` - useful for clients that need to maintain gRPC protocol compatibility
+3. **True Binary gRPC**: Send binary Protocol Buffer payloads with `Content-Type: application/grpc+proto` for maximum efficiency
+
+This flexibility allows you to choose the approach that best suits your application needs, from simple HTTP clients to specialized gRPC libraries.
+
+### Using gRPC with Postman
+
+We've created a detailed guide on how to use the gRPC API with Postman:
+
+- [gRPC Postman Guide](https://lokaid.gilangpratama.id/docs/grpc/postman.html)
+
+This guide includes:
+- Step-by-step instructions for setting up Postman
+- Example requests for all available methods
+- Error handling information
+- A ready-to-import Postman collection with all endpoints
+
+### Available Methods
+
+The following gRPC methods are available:
+
+- `GetAllStates` - Get all states/provinces
+- `GetState` - Get a specific state by its code
+- `GetCitiesInState` - Get all cities in a state
+- `GetCity` - Get a specific city by its code
+- `GetDistrictsInCity` - Get all districts in a city
+- `GetDistrict` - Get a specific district by its code
+- `GetVillagesInDistrict` - Get all villages in a district
+- `GetVillage` - Get a specific village by its code
+- `HealthCheck` - Health check
+
+### Error Handling
+
+The gRPC API provides robust error handling:
+
+- If a required field is missing or invalid, you'll receive a descriptive error message
+- The validation allows for legitimate falsy values (e.g., empty strings) while properly checking for missing fields
+- Error responses include a status code, timestamp, and detailed message to help with troubleshooting
+
+For more details on error handling, see the [gRPC Postman Guide](https://lokaid.gilangpratama.id/docs/grpc/postman.html#error-handling).
+
+### Using the gRPC Client
+
+A JavaScript/TypeScript client is provided for easy integration. Here's a simple example:
+
+```typescript
+import { GrpcClient } from './utils/grpcClient';
+
+// Create a client
+const client = new GrpcClient('https://lokaid.gilangpratama.id/grpc');
+
+// Get all states
+const statesResponse = await client.getAllStates();
+console.log(statesResponse.states);
+
+// Get a specific state
+const stateResponse = await client.getState('11');
+console.log(stateResponse.state);
+
+// Get cities in a state
+const citiesResponse = await client.getCitiesInState('11');
+console.log(citiesResponse.cities);
+```
+
+The client is fully tested and handles various edge cases gracefully:
+- Processing both JSON and binary responses
+- Handling network errors and server errors
+- Properly formatting request data for each endpoint
+
+For a complete example, see `src/examples/grpc-client-example.ts`.
+
+### gRPC Protocol Buffers
+
+The Protocol Buffer definitions are available in `src/proto/lokaid.proto`. You can use these definitions to generate clients in other languages.
+
+## Documentation
+
+The API comes with comprehensive documentation:
+
+- **Homepage** - Overview and key features of the API
+- **REST API Documentation** - Details about REST endpoints, parameters, and response formats
+- **gRPC API Documentation** - Information about gRPC services, Protocol Buffers, and client implementation
+
+The documentation is available in both Indonesian and English languages and can be accessed at:
+
+- [Homepage](https://lokaid.gilangpratama.id)
+- [REST API Documentation](https://lokaid.gilangpratama.id/docs/rest/)
+- [gRPC API Documentation](https://lokaid.gilangpratama.id/docs/grpc/)
+
+Each documentation page includes:
+- Detailed explanations of endpoints/methods
+- Code examples
+- Interactive test capabilities (for REST API)
+- Implementation guides
+
+## SEO and Discoverability
+
+The project includes several features to enhance its discoverability and search engine optimization:
+
+- **Sitemap**: XML sitemap available at `/sitemap.xml` with all pages and languages
+- **Robots.txt**: Properly configured robots.txt file
+- **Structured Data**: Rich structured data for better search engine understanding
+- **Meta Tags**: Comprehensive meta tags for SEO and social sharing
+- **Multilingual Support**: Proper hreflang annotations for language variants
+- **Semantic HTML**: Semantically structured HTML for better accessibility and indexing
+
+These features make LokaID more discoverable and improve its rankings in search results.
+
 ---
 
 ## Directories
@@ -47,6 +174,8 @@ A simple API for accessing Indonesian wilayah (administrative region) data—pro
 - `/src/utils` - Utilities and helpers
 - `/scripts` - Project scripts
 - `/raw` - Raw data/assets
+- `/public` - Static assets and documentation
+- `/public/docs` - API documentation pages
 
 ---
 
@@ -76,69 +205,4 @@ To validate that the split JSON files match the raw data, run:
 bun scripts/validate-split-output.js [states|cities|districts|villages]
 ```
 
-- You can specify one or more arguments (e.g. `states cities`).
-- If no arguments are given, all will be checked.
-- The script logs every code/value check and reports mismatches or missing entries.
-
-### Development
-
-```sh
-bun run dev
-```
-
-### Deploy
-
-```sh
-bun run deploy
-```
-
-### Type Generation
-
-For generating/synchronizing types based on your Worker configuration:
-
-```sh
-bun run cf-typegen
-```
-
-### Testing
-
-```sh
-bun run test
-```
-
-## Troubleshooting
-
-### Empty Responses
-
-If you encounter empty responses or "not found" errors when the data clearly exists:
-
-1. Verify that the data files (`states.json`, etc.) are properly loaded
-2. Check that the dynamic imports are working correctly
-3. Ensure that the test mocks match the actual data structure
-
-For deployment environments, make sure:
-- The static assets can be correctly accessed by the service
-- The path resolution for imports is correct for your environment
-
----
-
-## Contributing
-
-Contributions are welcome! Please open issues or submit pull requests. Ensure your code follows the linting and formatting rules:
-
-```sh
-bun run lint
-bun run lint:fix
-```
-
----
-
-## License
-
-This project is licensed under the terms of the MIT License. See the [LICENSE](./LICENSE) file for details.
-
----
-
-## Data Source Notice
-
-The file [`raw/base.txt`](./raw/base.txt) is derived from [`wilayah.sql`](https://github.com/cahyadsn/wilayah/blob/master/db/wilayah.sql) in the [cahyadsn/wilayah](https://github.com/cahyadsn/wilayah) repository, which is licensed under the MIT License. Please refer to their [repository](https://github.com/cahyadsn/wilayah) for more information and the original data.
+- You can specify one or more arguments (e.g. `

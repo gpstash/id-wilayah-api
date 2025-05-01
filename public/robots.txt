@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lokaid.gilangpratama.id/sitemap.xml 
