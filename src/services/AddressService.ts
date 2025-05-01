@@ -6,7 +6,7 @@ import {
   isValidVillageCode,
   extractStateCode,
   extractCityCode,
-  extractDistrictCode
+  extractDistrictCode,
 } from '../utils/validation';
 
 /**
@@ -19,14 +19,16 @@ export class AddressService {
    * @param path Path to the JSON file
    * @returns The imported data or null if import fails
    */
-  private async safeImport(path: string): Promise<any> {
+  private async safeImport(path: string): Promise<AddressResponse[] | null> {
     try {
       // Handle test patterns more gracefully
       if (path.includes('99') || path.includes('00')) {
         return null;
       }
       
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const mod = await import(/* @vite-ignore */ path);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
       return mod.default;
     } catch (error) {
       console.error(`Error importing ${path}:`, error);
@@ -41,7 +43,7 @@ export class AddressService {
   async getAllStates(): Promise<AddressResponse[]> {
     try {
       const data = await this.safeImport('../data/states.json');
-      return data || [];
+      return data ?? [];
     } catch (error) {
       console.error('Error loading states data:', error);
       return [];
@@ -62,7 +64,7 @@ export class AddressService {
     try {
       const states = await this.getAllStates();
       const state = states.find(state => state.code === stateCode);
-      return state || null;
+      return state ?? null;
     } catch (error) {
       console.error(`Error getting state ${stateCode}:`, error);
       return null;
@@ -82,7 +84,7 @@ export class AddressService {
 
     try {
       const data = await this.safeImport(`../data/cities/${stateCode}.json`);
-      return data || null;
+      return data ?? null;
     } catch (error) {
       console.error(`Error getting cities for state ${stateCode}:`, error);
       return null;
@@ -108,7 +110,7 @@ export class AddressService {
       if (!cities) return null;
       
       const city = cities.find(city => city.code === cityCode);
-      return city || null;
+      return city ?? null;
     } catch (error) {
       console.error(`Error getting city ${cityCode}:`, error);
       return null;
@@ -128,7 +130,7 @@ export class AddressService {
 
     try {
       const data = await this.safeImport(`../data/districts/${cityCode}.json`);
-      return data || null;
+      return data ?? null;
     } catch (error) {
       console.error(`Error getting districts for city ${cityCode}:`, error);
       return null;
@@ -154,7 +156,7 @@ export class AddressService {
       if (!districts) return null;
       
       const district = districts.find(district => district.code === districtCode);
-      return district || null;
+      return district ?? null;
     } catch (error) {
       console.error(`Error getting district ${districtCode}:`, error);
       return null;
@@ -174,7 +176,7 @@ export class AddressService {
 
     try {
       const data = await this.safeImport(`../data/villages/${districtCode}.json`);
-      return data || null;
+      return data ?? null;
     } catch (error) {
       console.error(`Error getting villages for district ${districtCode}:`, error);
       return null;
@@ -200,7 +202,7 @@ export class AddressService {
       if (!villages) return null;
       
       const village = villages.find(village => village.code === villageCode);
-      return village || null;
+      return village ?? null;
     } catch (error) {
       console.error(`Error getting village ${villageCode}:`, error);
       return null;

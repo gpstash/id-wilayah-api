@@ -1,12 +1,12 @@
 import { Hono } from 'hono';
 import type { Context } from 'hono';
-import type { CloudflareBindings } from '../types';
 import { addressService } from '../services';
+import type { CloudflareBindings } from '../types';
 import { 
   createErrorResponse, 
   createSuccessResponse, 
   validateCodeParam,
-  validateVillageCodeParam
+  validateVillageCodeParam,
 } from '../utils/http';
 
 export function createVillageRoutes(): Hono<{ Bindings: CloudflareBindings }> {

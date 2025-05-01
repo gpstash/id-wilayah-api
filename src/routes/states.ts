@@ -1,14 +1,14 @@
 import { Hono } from 'hono';
 import type { Context } from 'hono';
-import type { CloudflareBindings, AddressResponse } from '../types';
 import { addressService } from '../services';
+import type { CloudflareBindings } from '../types';
 import { 
   applyCacheHeaders, 
   createErrorResponse, 
   createSuccessResponse, 
   validateCodeParam,
-  validateStateCodeParam
-} from '../utils/http';
+  validateStateCodeParam,
+} from '../utils/http'; 
 
 export function createStateRoutes(): Hono<{ Bindings: CloudflareBindings }> {
   const router = new Hono<{ Bindings: CloudflareBindings }>();

@@ -7,7 +7,7 @@ import {
   isValidVillageCode,
   extractStateCode,
   extractCityCode,
-  extractDistrictCode
+  extractDistrictCode,
 } from './validation';
 
 const validData = {
@@ -69,8 +69,8 @@ describe('Code Validation Functions', () => {
       expect(isValidStateCode('../../etc/passwd')).toBe(false);
       expect(isValidStateCode('\u0000')).toBe(false);
       expect(isValidStateCode('<script>')).toBe(false);
-      expect(isValidStateCode(null as any)).toBe(false);
-      expect(isValidStateCode(undefined as any)).toBe(false);
+      expect(isValidStateCode(null as unknown as string)).toBe(false);
+      expect(isValidStateCode(undefined as unknown as string)).toBe(false);
     });
   });
 
@@ -94,8 +94,8 @@ describe('Code Validation Functions', () => {
       expect(isValidCityCode('31/74')).toBe(false);
       expect(isValidCityCode('\u0000')).toBe(false);
       expect(isValidCityCode('<script>')).toBe(false);
-      expect(isValidCityCode(null as any)).toBe(false);
-      expect(isValidCityCode(undefined as any)).toBe(false);
+      expect(isValidCityCode(null as unknown as string)).toBe(false);
+      expect(isValidCityCode(undefined as unknown as string)).toBe(false);
     });
   });
 
@@ -119,8 +119,8 @@ describe('Code Validation Functions', () => {
       expect(isValidDistrictCode('../31.74.04')).toBe(false);
       expect(isValidDistrictCode('\u0000')).toBe(false);
       expect(isValidDistrictCode('<script>')).toBe(false);
-      expect(isValidDistrictCode(null as any)).toBe(false);
-      expect(isValidDistrictCode(undefined as any)).toBe(false);
+      expect(isValidDistrictCode(null as unknown as string)).toBe(false);
+      expect(isValidDistrictCode(undefined as unknown as string)).toBe(false);
     });
   });
 
@@ -144,8 +144,8 @@ describe('Code Validation Functions', () => {
       expect(isValidVillageCode('../31.74.04.1001')).toBe(false);
       expect(isValidVillageCode('\u0000')).toBe(false);
       expect(isValidVillageCode('<script>')).toBe(false);
-      expect(isValidVillageCode(null as any)).toBe(false);
-      expect(isValidVillageCode(undefined as any)).toBe(false);
+      expect(isValidVillageCode(null as unknown as string)).toBe(false);
+      expect(isValidVillageCode(undefined as unknown as string)).toBe(false);
     });
   });
 
@@ -163,8 +163,8 @@ describe('Code Validation Functions', () => {
       expect(extractStateCode('a1')).toBeNull();
       expect(extractStateCode('a1.74')).toBeNull();
       expect(extractStateCode('../31')).toBeNull();
-      expect(extractStateCode(null as any)).toBeNull();
-      expect(extractStateCode(undefined as any)).toBeNull();
+      expect(extractStateCode(null as unknown as string)).toBeNull();
+      expect(extractStateCode(undefined as unknown as string)).toBeNull();
     });
   });
 
@@ -181,8 +181,8 @@ describe('Code Validation Functions', () => {
       expect(extractCityCode('31.7')).toBeNull();
       expect(extractCityCode('a1.74')).toBeNull();
       expect(extractCityCode('../31.74')).toBeNull();
-      expect(extractCityCode(null as any)).toBeNull();
-      expect(extractCityCode(undefined as any)).toBeNull();
+      expect(extractCityCode(null as unknown as string)).toBeNull();
+      expect(extractCityCode(undefined as unknown as string)).toBeNull();
     });
   });
 
@@ -199,8 +199,8 @@ describe('Code Validation Functions', () => {
       expect(extractDistrictCode('31.74.0')).toBeNull();
       expect(extractDistrictCode('a1.74.04')).toBeNull();
       expect(extractDistrictCode('../31.74.04')).toBeNull();
-      expect(extractDistrictCode(null as any)).toBeNull();
-      expect(extractDistrictCode(undefined as any)).toBeNull();
+      expect(extractDistrictCode(null as unknown as string)).toBeNull();
+      expect(extractDistrictCode(undefined as unknown as string)).toBeNull();
     });
   });
 });
