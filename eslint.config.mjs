@@ -9,8 +9,12 @@ export default [
     ignores: [
       '**/.wrangler/**',
       'eslint.config.*',
-      'scripts/*.js',
+      'scripts/**',
       'worker-configuration.d.ts',
+      'dist/**',
+      'src/examples/**',
+      'src/proto/generated/**',
+      'coverage/**',
       '*.js',
       '*.mjs',
       '*.cjs',

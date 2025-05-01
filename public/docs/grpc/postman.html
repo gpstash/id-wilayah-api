@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using LokaID gRPC API with Postman | LokaID Documentation</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Step-by-step guide for using LokaID gRPC API with Postman. Learn how to easily test and interact with Indonesian administrative region data using JSON over HTTP.">
+  <meta name="keywords" content="grpc, postman, api, indonesian regions, lokaid, json over http, api testing">
+  <meta name="author" content="Gilang Pratama">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="Using LokaID gRPC API with Postman">
+  <meta property="og:description" content="Step-by-step guide for using LokaID gRPC API with Postman. Learn how to easily test and interact with Indonesian administrative region data.">
+  <meta property="og:url" content="https://lokaid.gilangpratama.id/docs/grpc/postman.html">
+  <meta property="og:site_name" content="LokaID">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://lokaid.gilangpratama.id/images/og.png">
+  
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Using LokaID gRPC API with Postman">
+  <meta name="twitter:description" content="Step-by-step guide for using LokaID gRPC API with Postman. Learn how to easily test and interact with Indonesian administrative region data.">
+  <meta name="twitter:image" content="https://lokaid.gilangpratama.id/images/og.png">
+  
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://lokaid.gilangpratama.id/docs/grpc/postman.html">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
+  <!-- Font Preloading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Using LokaID gRPC API with Postman",
+    "description": "Step-by-step guide for using LokaID gRPC API with Postman. Learn how to easily test and interact with Indonesian administrative region data.",
+    "image": "https://lokaid.gilangpratama.id/images/og.png",
+    "author": {
+      "@type": "Person",
+      "name": "Gilang Pratama"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LokaID",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lokaid.gilangpratama.id/images/LokaID-logo.png"
+      }
+    },
+    "datePublished": "2023-08-01T12:00:00+07:00",
+    "dateModified": "2023-08-01T12:00:00+07:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://lokaid.gilangpratama.id/docs/grpc/postman.html"
+    },
+    "potentialAction": {
+      "@type": "ReadAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://lokaid.gilangpratama.id/docs/grpc/postman.html"
+      }
+    }
+  }
+  </script>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9fafb;
+      padding-bottom: 40px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 48px auto;
+      padding: 40px 32px 32px 32px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+    }
+    .logo {
+      display: block;
+      max-width: 130px;
+      width: 100%;
+      height: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-top: 16px;
+      margin-bottom: 24px;
+      line-height: 1.2;
+      color: #0f172a;
+      letter-spacing: -1px;
+    }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-top: 2.5rem;
+      margin-bottom: 16px;
+      color: #0f172a;
+      border-left: 4px solid #0061f2;
+      padding-left: 0.7em;
+    }
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+    p {
+      margin-bottom: 16px;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9em;
+    }
+    ul, ol {
+      margin: 16px 0 16px 32px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    a {
+      color: #0061f2;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4b5563;
+    }
+    .back-link:hover {
+      color: #0061f2;
+    }
+    .back-icon {
+      margin-right: 4px;
+    }
+    hr {
+      border: none;
+      border-top: 1.5px solid #e5e7eb;
+      margin: 18px 0 28px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    table, th, td {
+      border: 1px solid #e5e7eb;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f8fafc;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #4b5563;
+      margin-top: -0.5rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 600px) {
+      .container { margin: 16px auto; padding: 24px 16px; }
+      h1 { font-size: 2rem; }
+    }
+    .badge {
+      display: inline-block;
+      background: #0061f2;
+      color: white;
+      border-radius: 20px;
+      padding: 2px 14px;
+      font-size: 0.95em;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .method {
+      color: #0061f2;
+      font-weight: 600;
+    }
+    .feature-section {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    .quick-example {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 1.5rem 0;
+      border: 1px solid #e5e7eb;
+    }
+    .guide-section {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid #f1f5f9;
+    }
+    .guide-section h3 {
+      margin-top: 0;
+      color: #0061f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <div class="top-bar">
+      <a href="/" class="logo-link">
+        <img src="/images/LokaID-logo.png" alt="LokaID Logo" class="logo" style="margin-left:0;" />
+      </a>
+      <a href="/docs/grpc/" class="back-link">
+        <span class="back-icon">←</span> Back to gRPC docs
+      </a>
+    </div>
+    <hr />
+    
+    <h1>Using LokaID gRPC API with Postman</h1>
+    <p class="subtitle">Step-by-step guide for testing and interacting with the API</p>
+
+    <p>This guide provides step-by-step instructions on how to interact with the LokaID gRPC API using Postman.</p>
+
+    <h2>Introduction</h2>
+
+    <p>The LokaID gRPC implementation is designed to be easily accessible from HTTP clients like Postman. Unlike traditional gRPC services that require specialized clients, our implementation supports both:</p>
+
+    <ol>
+      <li>Standard gRPC binary format</li>
+      <li>JSON over HTTP for easier testing</li>
+    </ol>
+
+    <p>This guide focuses on the JSON over HTTP approach which is ideal for testing with Postman.</p>
+
+    <h2>Setting Up Postman</h2>
+
+    <ol>
+      <li><strong>Download and Install Postman</strong>: If you haven't already, download Postman from <a href="https://www.postman.com/downloads/" target="_blank" rel="noopener">https://www.postman.com/downloads/</a></li>
+      <li><strong>Create a New Collection</strong>:
+        <ul>
+          <li>Click on "Collections" in the sidebar</li>
+          <li>Click the "+" button to create a new collection</li>
+          <li>Name it "LokaID gRPC API"</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Base URL</h2>
+
+    <p>All gRPC endpoints are accessible at:</p>
+
+    <pre>https://lokaid.gilangpratama.id/grpc/{method}</pre>
+
+    <p>Where <code>{method}</code> is one of the available API methods (listed below).</p>
+
+    <h2>Example Requests</h2>
+
+    <h3>1. Health Check</h3>
+
+    <p>To check if the API is working:</p>
+
+    <ol>
+      <li>Create a new request in your collection</li>
+      <li>Set the method to <strong>POST</strong></li>
+      <li>Enter URL: <code>https://lokaid.gilangpratama.id/grpc/HealthCheck</code></li>
+      <li>Go to the "Headers" tab and add:
+        <ul>
+          <li>Key: <code>Content-Type</code></li>
+          <li>Value: <code>application/json</code></li>
+        </ul>
+      </li>
+      <li>Go to the "Body" tab, select "raw" and choose "JSON" from the dropdown</li>
+      <li>Enter an empty JSON object: <code>{}</code></li>
+      <li>Click "Send"</li>
+    </ol>
+
+    <p>You should receive a response like:</p>
+    <pre>{
+  "status": "OK",
+  "version": "1.0.0",
+  "timestamp": "2023-05-01T12:34:56.789Z"
+}</pre>
+
+    <h3>2. Get All States</h3>
+
+    <p>To retrieve all available states/provinces:</p>
+
+    <ol>
+      <li>Create a new request in your collection</li>
+      <li>Set the method to <strong>POST</strong></li>
+      <li>Enter URL: <code>https://lokaid.gilangpratama.id/grpc/GetAllStates</code></li>
+      <li>Go to the "Headers" tab and add:
+        <ul>
+          <li>Key: <code>Content-Type</code></li>
+          <li>Value: <code>application/json</code></li>
+        </ul>
+      </li>
+      <li>Go to the "Body" tab, select "raw" and choose "JSON" from the dropdown</li>
+      <li>Enter an empty JSON object: <code>{}</code></li>
+      <li>Click "Send"</li>
+    </ol>
+
+    <p>You should receive a response with all states in Indonesia.</p>
+
+    <h3>3. Get a Specific State</h3>
+
+    <p>To retrieve information about a specific state:</p>
+
+    <ol>
+      <li>Create a new request in your collection</li>
+      <li>Set the method to <strong>POST</strong></li>
+      <li>Enter URL: <code>https://lokaid.gilangpratama.id/grpc/GetState</code></li>
+      <li>Go to the "Headers" tab and add:
+        <ul>
+          <li>Key: <code>Content-Type</code></li>
+          <li>Value: <code>application/json</code></li>
+        </ul>
+      </li>
+      <li>Go to the "Body" tab, select "raw" and choose "JSON" from the dropdown</li>
+      <li>Enter the request JSON:
+<pre>{
+  "state_code": "11"
+}</pre>
+      </li>
+      <li>Click "Send"</li>
+    </ol>
+
+    <p>You should receive a response with details about the requested state.</p>
+
+    <h3>4. Get Cities in a State</h3>
+
+    <p>To retrieve all cities in a specific state:</p>
+
+    <ol>
+      <li>Create a new request in your collection</li>
+      <li>Set the method to <strong>POST</strong></li>
+      <li>Enter URL: <code>https://lokaid.gilangpratama.id/grpc/GetCitiesInState</code></li>
+      <li>Go to the "Headers" tab and add:
+        <ul>
+          <li>Key: <code>Content-Type</code></li>
+          <li>Value: <code>application/json</code></li>
+        </ul>
+      </li>
+      <li>Go to the "Body" tab, select "raw" and choose "JSON" from the dropdown</li>
+      <li>Enter the request JSON:
+<pre>{
+  "state_code": "11"
+}</pre>
+      </li>
+      <li>Click "Send"</li>
+    </ol>
+
+    <p>You should receive a response with all cities in the specified state.</p>
+
+    <h2>Available Methods</h2>
+
+    <p>The following methods are available in the LokaID gRPC API:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Description</th>
+          <th>Required Parameters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>HealthCheck</code></td>
+          <td>Check API health</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td><code>GetAllStates</code></td>
+          <td>Get all states/provinces</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td><code>GetState</code></td>
+          <td>Get a specific state</td>
+          <td><code>state_code</code></td>
+        </tr>
+        <tr>
+          <td><code>GetCitiesInState</code></td>
+          <td>Get cities in a state</td>
+          <td><code>state_code</code></td>
+        </tr>
+        <tr>
+          <td><code>GetCity</code></td>
+          <td>Get a specific city</td>
+          <td><code>city_code</code></td>
+        </tr>
+        <tr>
+          <td><code>GetDistrictsInCity</code></td>
+          <td>Get districts in a city</td>
+          <td><code>city_code</code></td>
+        </tr>
+        <tr>
+          <td><code>GetDistrict</code></td>
+          <td>Get a specific district</td>
+          <td><code>district_code</code></td>
+        </tr>
+        <tr>
+          <td><code>GetVillagesInDistrict</code></td>
+          <td>Get villages in a district</td>
+          <td><code>district_code</code></td>
+        </tr>
+        <tr>
+          <td><code>GetVillage</code></td>
+          <td>Get a specific village</td>
+          <td><code>village_code</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Error Handling</h2>
+
+    <p>If an error occurs, the API will return a standard error response:</p>
+
+    <pre>{
+  "error": "Error message",
+  "status": 404,
+  "timestamp": "2023-05-01T12:34:56.789Z"
+}</pre>
+
+    <p>Common error codes:</p>
+    <ul>
+      <li><code>400</code>: Bad Request - Missing or invalid parameters</li>
+      <li><code>404</code>: Not Found - The requested resource was not found</li>
+      <li><code>500</code>: Internal Server Error - Something went wrong on the server</li>
+    </ul>
+
+    <h2>Creating a Postman Collection</h2>
+
+    <p>You can import the following JSON to create a complete Postman collection with all endpoints:</p>
+
+    <pre>{
+  "info": {
+    "name": "LokaID gRPC API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "HealthCheck",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/HealthCheck",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "HealthCheck"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetAllStates",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetAllStates",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetAllStates"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetState",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetState",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetState"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"state_code\": \"11\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetCitiesInState",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetCitiesInState",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetCitiesInState"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"state_code\": \"11\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetCity",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetCity",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetCity"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"city_code\": \"1101\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetDistrictsInCity",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetDistrictsInCity",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetDistrictsInCity"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"city_code\": \"1101\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetDistrict",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetDistrict",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetDistrict"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"district_code\": \"110101\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetVillagesInDistrict",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetVillagesInDistrict",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetVillagesInDistrict"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"district_code\": \"110101\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "GetVillage",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://lokaid.gilangpratama.id/grpc/GetVillage",
+          "protocol": "https",
+          "host": ["lokaid", "gilangpratama", "id"],
+          "path": ["grpc", "GetVillage"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"village_code\": \"1101012001\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}</pre>
+
+    <p>To import this collection:</p>
+    <ol>
+      <li>Click on "Import" in the top left of Postman</li>
+      <li>Paste the JSON above</li>
+      <li>Click "Import"</li>
+    </ol>
+
+    <h2>Advanced Usage: Using gRPC Binary Format</h2>
+
+    <p>For those who want to use the actual gRPC binary format:</p>
+
+    <ol>
+      <li>Set the Content-Type header to <code>application/grpc+proto</code></li>
+      <li>You can send your request in two formats:
+        <ul>
+          <li><strong>JSON format</strong>: Simply send the JSON payload as you would with <code>application/json</code> content type. The server will automatically detect JSON content regardless of the content type.</li>
+          <li><strong>Binary format</strong>: Format your request body as a binary message according to the gRPC standard:
+            <ul>
+              <li>1 byte compression flag (usually 0)</li>
+              <li>4 bytes message length (big-endian)</li>
+              <li>Protocol Buffer encoded message</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>When using <code>application/grpc+proto</code>, the response will be in binary format by default. Add an <code>Accept: application/json</code> header if you prefer JSON responses.</li>
+    </ol>
+
+    <p>This server is optimized to support both standard gRPC clients and HTTP/JSON clients, making it flexible for different integration scenarios.</p>
+  </div>
+</body>
+</html> 

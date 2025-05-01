@@ -37,7 +37,7 @@ export class AddressService {
   async getState(stateCode: string): Promise<AddressResponse | null> {
     // Security validation
     if (!isValidStateCode(stateCode)) {
-      return null;
+      throw new Error(`Invalid state code: ${stateCode}`);
     }
 
     try {
@@ -46,7 +46,7 @@ export class AddressService {
       return state ?? null;
     } catch (error) {
       console.error(`Error getting state ${stateCode}:`, error);
-      return null;
+      throw error;
     }
   }
 

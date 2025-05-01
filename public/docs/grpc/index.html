@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="id" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="gRPC API wilayah Indonesia, gRPC dokumentasi, Protobuf wilayah, API provinsi gRPC, API kota gRPC, API kabupaten gRPC, API kecamatan gRPC, API desa gRPC, Protocol Buffers Indonesia, high-performance API, binary serialization, streaming API, RPC Indonesia, gRPC client, proto3 syntax, integrasi gRPC, low latency API" />
+  <meta name="last-modified" content="2025-05-01T00:00:00+07:00" />
+  <title>Dokumentasi gRPC API - LokaID</title>
+  <meta name="description" content="Dokumentasi lengkap gRPC API LokaID untuk mengakses data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) dengan performa tinggi. Mencakup definisi Protocol Buffers, contoh implementasi, dan panduan integrasi lengkap untuk developer." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://lokaid.gilangpratama.id/docs/grpc/" />
+  <meta name="author" content="Gilang Pratama" />
+  <meta name="theme-color" content="#0061f2" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/docs/grpc/" />
+  <link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/docs/grpc/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/grpc/" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lokaid.gilangpratama.id/docs/grpc/" />
+  <meta property="og:title" content="Dokumentasi gRPC API - LokaID" />
+  <meta property="og:description" content="Dokumentasi lengkap gRPC API LokaID untuk mengakses data wilayah administrasi Indonesia dengan performa tinggi. Mencakup definisi Protocol Buffers, contoh implementasi, dan panduan integrasi lengkap untuk developer." />
+  <meta property="og:site_name" content="LokaID" />
+  <meta property="og:image" content="https://lokaid.gilangpratama.id/images/LokaID-logo.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://lokaid.gilangpratama.id/docs/grpc/" />
+  <meta name="twitter:title" content="Dokumentasi gRPC API - LokaID" />
+  <meta name="twitter:description" content="Dokumentasi lengkap gRPC API LokaID untuk mengakses data wilayah administrasi Indonesia dengan performa tinggi. Mencakup definisi Protocol Buffers, contoh implementasi, dan panduan integrasi lengkap untuk developer." />
+  <meta name="twitter:image" content="https://lokaid.gilangpratama.id/images/LokaID-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <style>
+    :root {
+      --primary: #0061f2;
+      --bg: #f8fafc;
+      --white: #fff;
+      --gray: #e5e7eb;
+      --text: #22292f;
+      --code-bg: #f3f4f6;
+      --radius: 12px;
+      --shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
+    }
+    html, body {
+      margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 17px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px; margin: 48px auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 40px 32px 32px 32px;
+    }
+    h1, h2, h3 { margin-top: 0; font-weight: 600; }
+    h1 { font-size: 2.3rem; letter-spacing: -1px; }
+    h2 { margin-top: 2.5rem; font-size: 1.3rem; border-left: 4px solid var(--primary); padding-left: 0.7em; }
+    h3 { margin-top: 1.8rem; font-size: 1.1rem; }
+    .badge { display: inline-block; background: var(--primary); color: var(--white); border-radius: 20px; padding: 2px 14px; font-size: 0.95em; margin-bottom: 18px; letter-spacing: 0.5px; }
+    .desc { color: #4b5563; margin-bottom: 1.5em; }
+    .logo { display: block; max-width: 130px; width: 100%; height: auto; }
+    code, pre { background: var(--code-bg); border-radius: 6px; font-size: 0.97em; }
+    code { padding: 2px 7px; }
+    pre { padding: 15px 18px; overflow-x: auto; }
+    .lang-toggle {
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: all 0.15s ease;
+    }
+    .lang-toggle[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--white);
+      border: 2px solid var(--primary);
+      box-shadow: 0 2px 6px 0 rgba(0,97,242,0.08);
+    }
+    .lang-toggle[aria-pressed="false"] {
+      background: var(--white);
+      color: var(--primary);
+      border: 2px solid var(--gray);
+    }
+    .header-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    .nav-buttons {
+      display: flex;
+      margin-top: 2rem;
+      justify-content: space-between;
+    }
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .nav-button:hover {
+      background: #f0f7ff;
+    }
+    @media (max-width: 600px) {
+      .container { margin: 16px auto; padding: 24px 16px; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <div style="display:flex; justify-content:space-between; align-items:center">
+      <a href="/">
+        <img src="/images/LokaID-logo.png" alt="LokaID Logo" class="logo" style="margin-left:0;" />
+      </a>
+      <div style="display:flex;gap:8px;">
+        <button id="lang-id" aria-pressed="true" class="lang-toggle">🇮🇩 Bahasa</button>
+        <button id="lang-en" aria-pressed="false" class="lang-toggle">🇺🇸 English</button>
+      </div>
+    </div>
+    <hr style="border:none;border-top:1.5px solid #e5e7eb;margin:18px 0 28px 0;" />
+    
+    <!-- Indonesian Content -->
+    <div id="content-id" lang="id">
+      <h1>Dokumentasi gRPC API</h1>
+      <div class="desc">
+        API berperforma tinggi untuk data wilayah administrasi Indonesia: provinsi, kota/kabupaten, kecamatan, dan desa.<br>
+        Menggunakan Protocol Buffers dan gRPC untuk throughput tinggi dan efisiensi bandwidth.
+      </div>
+      
+      <h2>Apa itu gRPC?</h2>
+      <p>
+        gRPC adalah framework RPC (Remote Procedure Call) modern yang dikembangkan oleh Google. Berbeda dengan REST API yang menggunakan JSON,
+        gRPC menggunakan Protocol Buffers sebagai format pertukaran data yang lebih efisien dan terstruktur.
+      </p>
+      <p>
+        Keunggulan gRPC:
+      </p>
+      <ul>
+        <li><strong>Performa Tinggi</strong> — Serialisasi data biner yang lebih cepat dan efisien daripada JSON</li>
+        <li><strong>Strongly-typed</strong> — Kontrak API yang jelas dengan .proto files</li>
+        <li><strong>Bandwidth Kecil</strong> — Mengurangi penggunaan bandwidth dengan kompresi data</li>
+        <li><strong>Streaming</strong> — Mendukung streaming unary, server, client, dan bidirectional</li>
+      </ul>
+      
+      <h2>Protobuf Definition</h2>
+      <p>
+        Berikut adalah definisi Protocol Buffer yang digunakan oleh LokaID:
+      </p>
+      <pre>syntax = "proto3";
+
+package lokaid;
+
+service Address {
+  rpc GetStates(Empty) returns (StatesResponse);
+  rpc GetState(StateRequest) returns (StateResponse);
+  rpc GetCities(StateRequest) returns (CitiesResponse);
+  rpc GetCity(CityRequest) returns (CityResponse);
+  rpc GetDistricts(CityRequest) returns (DistrictsResponse);
+  rpc GetDistrict(DistrictRequest) returns (DistrictResponse);
+  rpc GetVillages(DistrictRequest) returns (VillagesResponse);
+  rpc GetVillage(VillageRequest) returns (VillageResponse);
+}
+
+message Empty {}
+
+message Region {
+  string code = 1;
+  string value = 2;
+}
+
+message StateRequest {
+  string code = 1;
+}
+
+message CityRequest {
+  string code = 1;
+}
+
+message DistrictRequest {
+  string code = 1;
+}
+
+message VillageRequest {
+  string code = 1;
+}
+
+message StatesResponse {
+  int32 status = 1;
+  string message = 2;
+  repeated Region data = 3;
+}
+
+message StateResponse {
+  int32 status = 1;
+  string message = 2;
+  Region data = 3;
+}
+
+message CitiesResponse {
+  int32 status = 1;
+  string message = 2;
+  repeated Region data = 3;
+}
+
+message CityResponse {
+  int32 status = 1;
+  string message = 2;
+  Region data = 3;
+}
+
+message DistrictsResponse {
+  int32 status = 1;
+  string message = 2;
+  repeated Region data = 3;
+}
+
+message DistrictResponse {
+  int32 status = 1;
+  string message = 2;
+  Region data = 3;
+}
+
+message VillagesResponse {
+  int32 status = 1;
+  string message = 2;
+  repeated Region data = 3;
+}
+
+message VillageResponse {
+  int32 status = 1;
+  string message = 2;
+  Region data = 3;
+}</pre>
+      
+      <h2>Menggunakan gRPC API</h2>
+      <p>
+        Untuk menggunakan gRPC API LokaID, ikuti langkah-langkah berikut:
+      </p>
+      
+      <div class="note" style="background:#f0f7ff;border-left:4px solid #3b82f6;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>Panduan Postman:</strong> Kami menyediakan panduan lengkap untuk menggunakan gRPC API dengan Postman.
+        <a href="postman.html" style="display:inline-block;margin-top:8px;color:#3b82f6;font-weight:500;">Buka Panduan Postman →</a>
+      </div>
+
+      <h3>1. Setup Client</h3>
+      <p>
+        Pertama, simpan definisi Protocol Buffer di atas ke file <code>lokaid.proto</code>. Kemudian, generate kode client menggunakan protoc untuk bahasa pemrograman yang kamu gunakan.
+      </p>
+      
+      <h3>2. Endpoint</h3>
+      <p>
+        Endpoint gRPC LokaID:
+      </p>
+      <pre>https://lokaid.gilangpratama.id/grpc/</pre>
+      
+      <h3>3. Contoh Kode (Node.js)</h3>
+      <pre>const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
+
+// Load protobuf
+const packageDefinition = protoLoader.loadSync('lokaid.proto', {
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true
+});
+
+const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
+const lokaid = protoDescriptor.lokaid;
+
+// Membuat gRPC client
+const client = new lokaid.Address(
+  'lokaid.gilangpratama.id/grpc',
+  grpc.credentials.createSsl()
+);
+
+// Mendapatkan daftar provinsi
+client.getStates({}, (err, response) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(response.data);
+});
+
+// Mendapatkan daftar kota di provinsi tertentu
+client.getCities({ code: '31' }, (err, response) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(response.data);
+});</pre>
+      
+      <h2>Metode Tersedia</h2>
+      <ul>
+        <li><code>GetStates(Empty)</code> — Mendapatkan daftar semua provinsi</li>
+        <li><code>GetState(StateRequest)</code> — Mendapatkan detail provinsi berdasarkan kode</li>
+        <li><code>GetCities(StateRequest)</code> — Mendapatkan daftar kota/kabupaten dalam provinsi</li>
+        <li><code>GetCity(CityRequest)</code> — Mendapatkan detail kota/kabupaten berdasarkan kode</li>
+        <li><code>GetDistricts(CityRequest)</code> — Mendapatkan daftar kecamatan dalam kota/kabupaten</li>
+        <li><code>GetDistrict(DistrictRequest)</code> — Mendapatkan detail kecamatan berdasarkan kode</li>
+        <li><code>GetVillages(DistrictRequest)</code> — Mendapatkan daftar desa dalam kecamatan</li>
+        <li><code>GetVillage(VillageRequest)</code> — Mendapatkan detail desa berdasarkan kode</li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <a href="/" class="nav-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Kembali ke Beranda
+        </a>
+        <a href="/docs/rest/" class="nav-button">
+          Dokumentasi REST API
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- English Content -->
+    <div id="content-en" lang="en" style="display:none">
+      <h1>gRPC API Documentation</h1>
+      <div class="desc">
+        High-performance API for Indonesian administrative region data: provinces, cities/regencies, districts, and villages.<br>
+        Using Protocol Buffers and gRPC for high throughput and bandwidth efficiency.
+      </div>
+      
+      <h2>What is gRPC?</h2>
+      <p>
+        gRPC is a modern RPC (Remote Procedure Call) framework developed by Google. Unlike REST APIs that use JSON,
+        gRPC uses Protocol Buffers as a more efficient and structured data exchange format.
+      </p>
+      <p>
+        Advantages of gRPC:
+      </p>
+      <ul>
+        <li><strong>High Performance</strong> — Binary data serialization that is faster and more efficient than JSON</li>
+        <li><strong>Strongly-typed</strong> — Clear API contracts with .proto files</li>
+        <li><strong>Low Bandwidth</strong> — Reduces bandwidth usage with data compression</li>
+        <li><strong>Streaming</strong> — Supports unary, server, client, and bidirectional streaming</li>
+      </ul>
+      
+      <h2>Using the gRPC API</h2>
+      <p>
+        To use the LokaID gRPC API, follow these steps:
+      </p>
+      
+      <div class="note" style="background:#f0f7ff;border-left:4px solid #3b82f6;padding:12px 16px;margin:16px 0;border-radius:4px;">
+        <strong>Postman Guide:</strong> We provide a comprehensive guide for using the gRPC API with Postman.
+        <a href="postman.html" style="display:inline-block;margin-top:8px;color:#3b82f6;font-weight:500;">View Postman Guide →</a>
+      </div>
+      
+      <h3>1. Client Setup</h3>
+      <p>
+        First, save the Protocol Buffer definition above to a file named <code>lokaid.proto</code>. Then, generate client code using protoc for the programming language you're using.
+      </p>
+      
+      <h3>2. Endpoint</h3>
+      <p>
+        Endpoint gRPC LokaID:
+      </p>
+      <pre>https://lokaid.gilangpratama.id/grpc/</pre>
+      
+      <h3>3. Example Code (Node.js)</h3>
+      <pre>const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
+
+// Load protobuf
+const packageDefinition = protoLoader.loadSync('lokaid.proto', {
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true
+});
+
+const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
+const lokaid = protoDescriptor.lokaid;
+
+// Create gRPC client
+const client = new lokaid.Address(
+  'lokaid.gilangpratama.id/grpc',
+  grpc.credentials.createSsl()
+);
+
+// Get list of provinces
+client.getStates({}, (err, response) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(response.data);
+});
+
+// Get list of cities in a province
+client.getCities({ code: '31' }, (err, response) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  console.log(response.data);
+});</pre>
+      
+      <h2>Available Methods</h2>
+      <ul>
+        <li><code>GetStates(Empty)</code> — Get a list of all provinces</li>
+        <li><code>GetState(StateRequest)</code> — Get province details by code</li>
+        <li><code>GetCities(StateRequest)</code> — Get list of cities/regencies in a province</li>
+        <li><code>GetCity(CityRequest)</code> — Get city/regency details by code</li>
+        <li><code>GetDistricts(CityRequest)</code> — Get list of districts in a city/regency</li>
+        <li><code>GetDistrict(DistrictRequest)</code> — Get district details by code</li>
+        <li><code>GetVillages(DistrictRequest)</code> — Get list of villages in a district</li>
+        <li><code>GetVillage(VillageRequest)</code> — Get village details by code</li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <a href="/?lang=en" class="nav-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to Home
+        </a>
+        <a href="/docs/rest/?lang=en" class="nav-button">
+          REST API Documentation
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Language switcher
+    const btnID = document.getElementById('lang-id');
+    const btnEN = document.getElementById('lang-en');
+    const contentID = document.getElementById('content-id');
+    const contentEN = document.getElementById('content-en');
+    
+    // Check URL for language preference
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    
+    if (langParam === 'en') {
+      setEnglish();
+    } else {
+      setIndonesian();
+    }
+    
+    function setIndonesian() {
+      btnID.setAttribute('aria-pressed', 'true');
+      btnEN.setAttribute('aria-pressed', 'false');
+      contentID.style.display = '';
+      contentEN.style.display = 'none';
+      document.documentElement.lang = 'id';
+    }
+    
+    function setEnglish() {
+      btnID.setAttribute('aria-pressed', 'false');
+      btnEN.setAttribute('aria-pressed', 'true');
+      contentID.style.display = 'none';
+      contentEN.style.display = '';
+      document.documentElement.lang = 'en';
+    }
+    
+    btnID.onclick = function() {
+      setIndonesian();
+      history.replaceState({}, '', window.location.pathname);
+    };
+    
+    btnEN.onclick = function() {
+      setEnglish();
+      history.replaceState({}, '', window.location.pathname + '?lang=en');
+    };
+  </script>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "LokaID gRPC API Documentation",
+      "description": "Comprehensive documentation for the LokaID gRPC API with Protocol Buffers, methods, and implementation examples.",
+      "image": "https://lokaid.gilangpratama.id/images/LokaID-logo.png",
+      "datePublished": "2025-05-01T00:00:00+07:00",
+      "dateModified": "2025-05-01T00:00:00+07:00",
+      "author": {
+        "@type": "Person",
+        "name": "Gilang Pratama"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "LokaID",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lokaid.gilangpratama.id/images/LokaID-logo.png"
+        }
+        "@type": "Person",
+        "name": "Gilang Pratama",
+        "url": "https://github.com/gpstash"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "LokaID",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lokaid.gilangpratama.id/images/LokaID-logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://lokaid.gilangpratama.id/docs/grpc/"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "LokaID gRPC API",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any"
+      },
+      "articleSection": "Technical Documentation",
+      "keywords": "gRPC API, Protocol Buffers, Indonesia regions, API documentation, binary serialization, RPC methods, high-performance API",
+      "wordCount": "1500",
+      "inLanguage": ["id", "en"],
+      "isAccessibleForFree": true,
+      "educationalUse": "Research",
+      "accessibilitySummary": "Complete gRPC documentation with Protocol Buffer definitions and implementation examples",
+      "discussionUrl": "https://github.com/gpstash/lokaid/issues",
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "gRPC: A high-performance, open source universal RPC framework",
+        "url": "https://grpc.io/"
+      }
+    }
+  </script>
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JFYMC15D7Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JFYMC15D7Z');
+  </script>
+  
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "38aaf1a797164c718bb226aa006dadf6"}'></script>
+</body>
+</html> 
