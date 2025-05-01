@@ -4,205 +4,166 @@
   <img src="public/images/LokaID-logo.png" alt="LokaID Logo" width="120" />
 </p>
 
----
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Description
+## Overview
 
-A simple API for accessing Indonesian wilayah (administrative region) data—provinces, cities, districts, and villages. Built with Hono and designed for easy integration, this service makes it a breeze to fetch and validate Indonesian address data in your apps. Perfect for anyone needing up-to-date, structured wilayah info—whether you're building forms, dashboards, or address validation tools.
+LokaID is a lightweight, high-performance API for Indonesian administrative region data. It provides structured access to provinces, cities, districts, and villages through both REST and gRPC interfaces.
 
-[Use the API](https://lokaid.gilangpratama.id)
+🔗 **Live API**: [https://lokaid.gilangpratama.id](https://lokaid.gilangpratama.id)
 
-## Features
+## Key Features
 
-- **Secure**: Protected against directory traversal attacks with strict input validation
-- **Structured Responses**: Standardized JSON response format across all endpoints
-- **Fast**: Efficiently serves address data with minimal overhead
-- **Robust Error Handling**: Graceful error responses for all scenarios
-- **Dynamic Loading**: Only loads needed data files as required, optimizing memory usage and startup time
+- **Comprehensive Data**: Complete coverage of Indonesian administrative regions
+- **Dual API Support**: Both REST and gRPC interfaces with identical functionality
+- **High Performance**: Optimized for speed with minimal overhead
+- **Robust Security**: Protected against common attack vectors with strict validation
+- **Developer-Friendly**: Consistent response formats with clear documentation
+- **Resource Efficient**: Dynamic data loading to optimize memory usage
 
-## Data Structure
+## REST API
 
-- The address data files (`states.json`, `cities/*.json`, `districts/*.json`, `villages/*.json`) only include `code` and `value` for each state, city, district, and village.
+### Endpoints
 
-## Available Endpoints
+| Endpoint | Description |
+|----------|-------------|
+| `GET /states` | List all provinces |
+| `GET /states/:stateCode` | Get province details by code |
+| `GET /states/:stateCode/cities` | List all cities in a province |
+| `GET /cities/:cityCode` | Get city details by code |
+| `GET /cities/:cityCode/districts` | List all districts in a city |
+| `GET /districts/:districtCode` | Get district details by code |
+| `GET /districts/:districtCode/villages` | List all villages in a district |
+| `GET /villages/:villageCode` | Get village details by code |
+| `GET /health` | Health check endpoint |
 
-- `GET /states` — List all provinces (states)
-- `GET /states/:stateCode` — Get province details by code
-- `GET /states/:stateCode/cities` — List all cities/regencies in a province
-- `GET /cities/:cityCode` — Get city/regency details by code
-- `GET /cities/:cityCode/districts` — List all districts in a city/regency
-- `GET /districts/:districtCode` — Get district details by code
-- `GET /districts/:districtCode/villages` — List all villages in a district
-- `GET /villages/:villageCode` — Get village details by code
-- `GET /health` — Health check for the API
+## gRPC API
 
-## gRPC Support
+The gRPC implementation offers the same functionality as the REST API with enhanced performance benefits.
 
-This project now supports both REST and gRPC APIs for accessing location data. The gRPC implementation is designed to be compatible with Cloudflare Workers and provides the same functionality as the REST API.
-
-### gRPC Endpoint
-
-The gRPC service is available at:
+### Endpoint Structure
 
 ```
 https://lokaid.gilangpratama.id/grpc/{method}
 ```
 
-The API uses a simplified endpoint structure with direct method calls, making it more intuitive and easier to use than traditional gRPC implementations.
+### Content Type Options
 
-### Flexible Content Types
-
-The gRPC API supports multiple ways to send requests:
-
-1. **JSON over HTTP**: Send requests with `Content-Type: application/json` for standard JSON handling
-2. **JSON with gRPC Content Type**: Send JSON payloads with `Content-Type: application/grpc+proto` - useful for clients that need to maintain gRPC protocol compatibility
-3. **True Binary gRPC**: Send binary Protocol Buffer payloads with `Content-Type: application/grpc+proto` for maximum efficiency
-
-This flexibility allows you to choose the approach that best suits your application needs, from simple HTTP clients to specialized gRPC libraries.
-
-### Using gRPC with Postman
-
-We've created a detailed guide on how to use the gRPC API with Postman:
-
-- [gRPC Postman Guide](https://lokaid.gilangpratama.id/docs/grpc/postman.html)
-
-This guide includes:
-- Step-by-step instructions for setting up Postman
-- Example requests for all available methods
-- Error handling information
-- A ready-to-import Postman collection with all endpoints
+- `application/json`: Standard JSON for broad compatibility
+- `application/grpc+proto`: For both JSON and binary Protocol Buffer payloads
 
 ### Available Methods
 
-The following gRPC methods are available:
+- `GetAllStates`
+- `GetState`
+- `GetCitiesInState`
+- `GetCity`
+- `GetDistrictsInCity`
+- `GetDistrict`
+- `GetVillagesInDistrict`
+- `GetVillage`
+- `HealthCheck`
 
-- `GetAllStates` - Get all states/provinces
-- `GetState` - Get a specific state by its code
-- `GetCitiesInState` - Get all cities in a state
-- `GetCity` - Get a specific city by its code
-- `GetDistrictsInCity` - Get all districts in a city
-- `GetDistrict` - Get a specific district by its code
-- `GetVillagesInDistrict` - Get all villages in a district
-- `GetVillage` - Get a specific village by its code
-- `HealthCheck` - Health check
-
-### Error Handling
-
-The gRPC API provides robust error handling:
-
-- If a required field is missing or invalid, you'll receive a descriptive error message
-- The validation allows for legitimate falsy values (e.g., empty strings) while properly checking for missing fields
-- Error responses include a status code, timestamp, and detailed message to help with troubleshooting
-
-For more details on error handling, see the [gRPC Postman Guide](https://lokaid.gilangpratama.id/docs/grpc/postman.html#error-handling).
-
-### Using the gRPC Client
-
-A JavaScript/TypeScript client is provided for easy integration. Here's a simple example:
+### Client Implementation Example
 
 ```typescript
 import { GrpcClient } from './utils/grpcClient';
 
-// Create a client
+// Initialize client
 const client = new GrpcClient('https://lokaid.gilangpratama.id/grpc');
 
-// Get all states
+// Fetch all provinces
 const statesResponse = await client.getAllStates();
 console.log(statesResponse.states);
 
-// Get a specific state
+// Get specific province
 const stateResponse = await client.getState('11');
 console.log(stateResponse.state);
 
-// Get cities in a state
+// Get cities in a province
 const citiesResponse = await client.getCitiesInState('11');
 console.log(citiesResponse.cities);
 ```
 
-The client is fully tested and handles various edge cases gracefully:
-- Processing both JSON and binary responses
-- Handling network errors and server errors
-- Properly formatting request data for each endpoint
+The client handles both JSON and binary responses and manages error scenarios gracefully. For a complete implementation, see `src/examples/grpc-client-example.ts`.
 
-For a complete example, see `src/examples/grpc-client-example.ts`.
+### Protocol Buffers
 
-### gRPC Protocol Buffers
-
-The Protocol Buffer definitions are available in `src/proto/lokaid.proto`. You can use these definitions to generate clients in other languages.
+Protocol Buffer definitions are available in `src/proto/lokaid.proto` for generating clients in other languages.
 
 ## Documentation
 
-The API comes with comprehensive documentation:
+Comprehensive documentation is available in both English and Indonesian:
 
-- **Homepage** - Overview and key features of the API
-- **REST API Documentation** - Details about REST endpoints, parameters, and response formats
-- **gRPC API Documentation** - Information about gRPC services, Protocol Buffers, and client implementation
+- [API Home](https://lokaid.gilangpratama.id)
+- [REST API Docs](https://lokaid.gilangpratama.id/docs/rest/)
+- [gRPC API Docs](https://lokaid.gilangpratama.id/docs/grpc/)
+- [Postman Guide for gRPC](https://lokaid.gilangpratama.id/docs/grpc/postman.html)
 
-The documentation is available in both Indonesian and English languages and can be accessed at:
+## Data Structure
 
-- [Homepage](https://lokaid.gilangpratama.id)
-- [REST API Documentation](https://lokaid.gilangpratama.id/docs/rest/)
-- [gRPC API Documentation](https://lokaid.gilangpratama.id/docs/grpc/)
+The data is organized hierarchically with the following format:
 
-Each documentation page includes:
-- Detailed explanations of endpoints/methods
-- Code examples
-- Interactive test capabilities (for REST API)
-- Implementation guides
+- **States/Provinces**: `states.json` with `code` and `value` fields
+- **Cities**: `cities/*.json` with `code` and `value` fields
+- **Districts**: `districts/*.json` with `code` and `value` fields
+- **Villages**: `villages/*.json` with `code` and `value` fields
 
-## SEO and Discoverability
+## Project Structure
 
-The project includes several features to enhance its discoverability and search engine optimization:
+```
+/
+├── src/                # Application source code
+│   ├── routes/         # API route definitions
+│   ├── services/       # Business logic
+│   ├── types/          # TypeScript type definitions
+│   ├── utils/          # Helper utilities
+│   └── proto/          # Protocol Buffer definitions
+├── scripts/            # Data processing scripts
+├── raw/                # Raw source data
+├── public/             # Static assets and documentation
+└── README.md           # This file
+```
 
-- **Sitemap**: XML sitemap available at `/sitemap.xml` with all pages and languages
-- **Robots.txt**: Properly configured robots.txt file
-- **Structured Data**: Rich structured data for better search engine understanding
-- **Meta Tags**: Comprehensive meta tags for SEO and social sharing
-- **Multilingual Support**: Proper hreflang annotations for language variants
-- **Semantic HTML**: Semantically structured HTML for better accessibility and indexing
+## Getting Started
 
-These features make LokaID more discoverable and improve its rankings in search results.
+### Prerequisites
 
----
+- [Bun](https://bun.sh/) runtime
 
-## Directories
-
-- `/src` - Application source code
-- `/src/routes` - API routes
-- `/src/services` - Business logic and integrations
-- `/src/types` - Type definitions
-- `/src/utils` - Utilities and helpers
-- `/scripts` - Project scripts
-- `/raw` - Raw data/assets
-- `/public` - Static assets and documentation
-- `/public/docs` - API documentation pages
-
----
-
-## How to Use
-
-### Install dependencies
+### Installation
 
 ```sh
+# Clone the repository
+git clone https://github.com/yourusername/lokaid.git
+cd lokaid
+
+# Install dependencies
 bun install
 ```
 
-### Prepare Data (Scripts)
+### Data Preparation
 
-To generate the up-to-date JSON data files from the raw source, run:
+Generate the JSON data files from raw sources:
 
 ```sh
 bun scripts/split-base-json.js
 ```
 
-This ensures all data files are in sync with the latest structure and ready for use by the API.
+### Data Validation
 
-### Validate Data Output
-
-To validate that the split JSON files match the raw data, run:
+Verify the integrity of the generated data:
 
 ```sh
 bun scripts/validate-split-output.js [states|cities|districts|villages]
 ```
 
-- You can specify one or more arguments (e.g. `
+You can specify one or more data types to validate.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
