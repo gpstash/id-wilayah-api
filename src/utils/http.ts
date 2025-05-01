@@ -1,6 +1,12 @@
 import type { Context } from 'hono';
 import type { InvalidJSONValue, JSONValue } from 'hono/utils/types';
 import type { ErrorResponse, CloudflareBindings } from '../types';
+import {
+  isValidStateCode,
+  isValidCityCode,
+  isValidDistrictCode,
+  isValidVillageCode
+} from './validation';
 
 export const SUCCESS_MESSAGE = 'SUCCESS';
 
@@ -22,6 +28,38 @@ export const createErrorResponse = (message: string, status: number, path: strin
 export const validateCodeParam = (c: Context<{ Bindings: CloudflareBindings }>, paramName: string): boolean => {
   const code = c.req.param(paramName);
   return !!code && code.trim().length > 0;
+};
+
+/**
+ * Validate a state code parameter with strict format checking
+ */
+export const validateStateCodeParam = (c: Context<{ Bindings: CloudflareBindings }>): boolean => {
+  const stateCode = c.req.param('stateCode');
+  return isValidStateCode(stateCode);
+};
+
+/**
+ * Validate a city code parameter with strict format checking
+ */
+export const validateCityCodeParam = (c: Context<{ Bindings: CloudflareBindings }>): boolean => {
+  const cityCode = c.req.param('cityCode');
+  return isValidCityCode(cityCode);
+};
+
+/**
+ * Validate a district code parameter with strict format checking
+ */
+export const validateDistrictCodeParam = (c: Context<{ Bindings: CloudflareBindings }>): boolean => {
+  const districtCode = c.req.param('districtCode');
+  return isValidDistrictCode(districtCode);
+};
+
+/**
+ * Validate a village code parameter with strict format checking
+ */
+export const validateVillageCodeParam = (c: Context<{ Bindings: CloudflareBindings }>): boolean => {
+  const villageCode = c.req.param('villageCode');
+  return isValidVillageCode(villageCode);
 };
 
 /**

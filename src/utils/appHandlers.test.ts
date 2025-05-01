@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import type { CloudflareBindings } from '../types';
 import { applyGlobalHandlers } from './appHandlers';
 
@@ -21,14 +21,25 @@ function isErrorResponse(body: unknown): body is ErrorResponseShape {
 
 describe('applyGlobalHandlers', () => {
   let app: Hono<{ Bindings: CloudflareBindings }>;
+  let originalConsoleError: typeof console.error;
 
   beforeEach(() => {
+    // Save original console.error
+    originalConsoleError = console.error;
+    // Mock console.error to prevent logs in test output
+    console.error = vi.fn();
+
     app = new Hono<{ Bindings: CloudflareBindings }>();
     // Route that throws an error
     app.get('/error', () => {
       throw new Error('Simulated error');
     });
     applyGlobalHandlers(app);
+  });
+
+  afterEach(() => {
+    // Restore original console.error after each test
+    console.error = originalConsoleError;
   });
 
   it('returns JSON error response on uncaught error', async () => {
