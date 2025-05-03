@@ -24,6 +24,7 @@ export default defineConfig({
         '.output/**',
         '.temp/**',
         'src/types/**',
+        'vitest.config.ts',
       ],
     },
   },

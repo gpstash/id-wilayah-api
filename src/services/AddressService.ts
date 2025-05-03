@@ -61,9 +61,16 @@ export class AddressService {
       return null;
     }
 
+    // Additional input validation
+    const sanitizedStateCode = stateCode.replace(/[^0-9]/g, '');
+    if (sanitizedStateCode !== stateCode) {
+      console.error(`Invalid state code format: ${stateCode}`);
+      return null;
+    }
+
     try {
       // Use a type assertion for the dynamic import to avoid the 'any' type error
-      const cities = await import(`../data/cities/${stateCode}.json`) as { default: AddressResponse[] };
+      const cities = await import(`../data/cities/${sanitizedStateCode}.json`) as { default: AddressResponse[] };
       return cities.default;
     } catch (error) {
       console.error(`Error getting cities for state ${stateCode}:`, error);
@@ -108,9 +115,16 @@ export class AddressService {
       return null;
     }
 
+    // Additional input validation
+    const sanitizedCityCode = cityCode.replace(/[^0-9.]/g, '');
+    if (sanitizedCityCode !== cityCode) {
+      console.error(`Invalid city code format: ${cityCode}`);
+      return null;
+    }
+
     try {
       // Type assertion for dynamic import
-      const districts = await import(`../data/districts/${cityCode}.json`) as { default: AddressResponse[] };
+      const districts = await import(`../data/districts/${sanitizedCityCode}.json`) as { default: AddressResponse[] };
       return districts.default;
     } catch (error) {
       console.error(`Error getting districts for city ${cityCode}:`, error);
@@ -155,9 +169,16 @@ export class AddressService {
       return null;
     }
 
+    // Additional input validation
+    const sanitizedDistrictCode = districtCode.replace(/[^0-9.]/g, '');
+    if (sanitizedDistrictCode !== districtCode) {
+      console.error(`Invalid district code format: ${districtCode}`);
+      return null;
+    }
+
     try {
       // Type assertion for dynamic import
-      const villages = await import(`../data/villages/${districtCode}.json`) as { default: AddressResponse[] };
+      const villages = await import(`../data/villages/${sanitizedDistrictCode}.json`) as { default: AddressResponse[] };
       return villages.default;
     } catch (error) {
       console.error(`Error getting villages for district ${districtCode}:`, error);

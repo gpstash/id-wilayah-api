@@ -8,6 +8,7 @@
 		"lint:fix": "eslint . --fix",
 		"prepare": "husky",
 		"test": "vitest --run",
+		"test:clean": "vitest --run --silent",
 		"test:watch": "vitest --watch",
 		"test:coverage": "vitest run --coverage",
 		"proto:gen": "pbjs -t static-module -w es6 -o src/proto/generated/lokaid.js src/proto/lokaid.proto && pbts -o src/proto/generated/lokaid.d.ts src/proto/generated/lokaid.js"
@@ -29,6 +30,7 @@
 		"eslint": "^9.25.1",
 		"eslint-config-prettier": "^10.1.2",
 		"eslint-plugin-prettier": "^5.2.6",
+		"eslint-plugin-security": "^2.1.1",
 		"husky": "^9.1.7",
 		"lint-staged": "^15.5.1",
 		"prettier": "^3.5.3",
