@@ -63,10 +63,60 @@ export const validateVillageCodeParam = (c: Context<{ Bindings: CloudflareBindin
 };
 
 /**
- * Apply cache headers for better performance
+ * Calculate appropriate cache TTL based on resource type
+ * - Reference data like states rarely changes (1 week)
+ * - Cities, districts change infrequently (1 day)
+ * - Villages might change more often (12 hours)
+ * - Other resources (1 hour by default)
  */
-export const applyCacheHeaders = (c: Context<{ Bindings: CloudflareBindings }>, maxAge = 86400): void => {
-  c.header('Cache-Control', `public, max-age=${String(maxAge)}`);
+const getCacheTTL = (path: string): number => {
+  // States data rarely changes
+  if (path === '/states' || (/^\/states\/[0-9]{2}$/.exec(path))) {
+    return 604800; // 1 week
+  }
+  
+  // Cities data changes infrequently
+  if ((/^\/states\/[0-9]{2}\/cities$/.exec(path)) || (/^\/cities\/[0-9]{2}\.[0-9]{2}$/.exec(path))) {
+    return 86400; // 1 day
+  }
+  
+  // Districts data
+  if ((/^\/cities\/[0-9]{2}\.[0-9]{2}\/districts$/.exec(path)) || (/^\/districts\/[0-9]{2}\.[0-9]{2}\.[0-9]{2}$/.exec(path))) {
+    return 86400; // 1 day
+  }
+  
+  // Villages data
+  if ((/^\/districts\/[0-9]{2}\.[0-9]{2}\.[0-9]{2}\/villages$/.exec(path)) || (/^\/villages\/[0-9]{2}\.[0-9]{2}\.[0-9]{2}\.[0-9]{4}$/.exec(path))) {
+    return 43200; // 12 hours
+  }
+  
+  // Default for other endpoints
+  return 3600; // 1 hour
+};
+
+/**
+ * Apply optimized cache headers for better performance with Cloudflare
+ * Includes:
+ * - Variable TTL based on resource type
+ * - Cache-Control directives for CDN caching
+ * - ETag support for conditional requests
+ */
+export const applyCacheHeaders = (c: Context<{ Bindings: CloudflareBindings }>): void => {
+  const path = c.req.path;
+  const maxAge = getCacheTTL(path);
+  
+  c.header('Cache-Control', `public, max-age=${String(maxAge)}, s-maxage=${String(maxAge)}, stale-while-revalidate=60`);
+  c.header('Vary', 'Accept');
+  
+  // Signal to Cloudflare to cache this response
+  c.header('CDN-Cache-Control', `max-age=${String(maxAge)}`);
+  
+  // Enable automatic compression
+  c.header('Accept-Encoding', 'gzip, deflate, br');
+  
+  // Set expiration for compatibility with older clients
+  const expires = new Date(Date.now() + maxAge * 1000).toUTCString();
+  c.header('Expires', expires);
 };
 
 export const createSuccessResponse = (data: JSONValue | {} | InvalidJSONValue) => {

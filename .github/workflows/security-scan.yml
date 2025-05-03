@@ -1,0 +1,142 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run weekly on Monday at 2:00 AM
+    - cron: '0 2 * * 1'
+
+jobs:
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+        
+      - name: Run Snyk for dependency scanning
+        uses: snyk/actions/node@master
+        continue-on-error: true  # Don't fail the build, just report
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  code-analysis:
+    name: Static Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+      
+      - name: Run ESLint Security Check
+        run: >
+          npx eslint . 
+          --config .eslintrc.json 
+          --ext .ts 
+          --plugin security 
+          --rule 'security/detect-object-injection: error'
+
+      - name: Setup CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript, typescript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:javascript"
+
+  secrets-scan:
+    name: Secrets Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full git history for better detection
+          
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+  security-headers-check:
+    name: Security Headers Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Install Security Headers Scanner
+        run: npm install -g security-headers-cli
+      
+      - name: Check Security Headers
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            # For pull requests, we'll use a local or test environment check
+            echo "Pull request: Running header check script on code"
+            # This is a simplified check that just verifies our headers are set correctly
+            grep -r "X-Content-Type-Options" ./src || echo "Missing X-Content-Type-Options header"
+            grep -r "X-Frame-Options" ./src || echo "Missing X-Frame-Options header"
+            grep -r "Strict-Transport-Security" ./src || echo "Missing HSTS header"
+          else
+            # For main branch pushes, we can check the actual deployed site
+            echo "Main branch: Checking live site headers"
+            security-headers-cli https://lokaid.gilangpratama.id || true
+          fi
+
+  input-validation-check:
+    name: Input Validation Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check Input Validation
+        run: |
+          # Check for input validation in the codebase
+          echo "Checking for input validation..."
+          
+          # Check that route parameters are validated
+          grep -r "validateCodeParam\|validateStateCodeParam\|validateCityCodeParam\|validateDistrictCodeParam\|validateVillageCodeParam" --include="*.ts" ./src || echo "WARNING: Input validation might be missing"
+          
+          # Check that all parameters accessed use proper validation
+          grep -r "param(" --include="*.ts" ./src | grep -v "validate" && echo "WARNING: Found route params without validation" || echo "All route params appear to be validated"
+
+  report:
+    name: Generate Security Report
+    needs: [dependency-scan, code-analysis, secrets-scan, security-headers-check, input-validation-check]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Security Scan Summary
+        run: |
+          echo "## Security Scan Summary" > $GITHUB_STEP_SUMMARY
+          echo "Completed security scans:" >> $GITHUB_STEP_SUMMARY
+          echo "- Dependency vulnerability scanning" >> $GITHUB_STEP_SUMMARY
+          echo "- Static code analysis" >> $GITHUB_STEP_SUMMARY
+          echo "- Secret detection" >> $GITHUB_STEP_SUMMARY
+          echo "- Security headers check" >> $GITHUB_STEP_SUMMARY
+          echo "- Input validation check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Review the logs of each job for detailed findings." >> $GITHUB_STEP_SUMMARY 

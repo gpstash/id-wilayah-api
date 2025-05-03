@@ -27,4 +27,29 @@ jobs:
         run: bun run test
       
       - name: Generate test coverage
-        run: bun run test:coverage 
+        run: bun run test:coverage
+
+  security-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      
+      - name: Install dependencies
+        run: bun install
+      
+      - name: Check for basic security issues
+        run: |
+          # Check for common security issues
+          echo "Checking for common security issues..."
+          
+          # Check for input validation on route parameters
+          grep -r "validate.*Param" --include="*.ts" ./src || echo "Warning: Route param validation might be missing."
+          
+          # Verify security headers are used
+          grep -r "X-Content-Type-Options" --include="*.ts" ./src || echo "Warning: X-Content-Type-Options header might be missing."
+          grep -r "X-Frame-Options" --include="*.ts" ./src || echo "Warning: X-Frame-Options header might be missing." 
