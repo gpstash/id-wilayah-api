@@ -6,35 +6,35 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <!-- Homepage -->
   <url>
-    <loc>https://lokaid.gilangpratama.id/</loc>
+    <loc>https://lokaid.gilangpratama.id</loc>
     <lastmod>2025-05-01T00:00:00+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id" />
   </url>
   
   <!-- REST API Documentation -->
   <url>
-    <loc>https://lokaid.gilangpratama.id/docs/rest/</loc>
+    <loc>https://lokaid.gilangpratama.id/docs/rest</loc>
     <lastmod>2025-05-01T00:00:00+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/docs/rest/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/docs/rest/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/rest/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/docs/rest" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/docs/rest?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/rest" />
   </url>
   
   <!-- gRPC API Documentation -->
   <url>
-    <loc>https://lokaid.gilangpratama.id/docs/grpc/</loc>
+    <loc>https://lokaid.gilangpratama.id/docs/grpc</loc>
     <lastmod>2025-05-01T00:00:00+07:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/docs/grpc/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/docs/grpc/?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/grpc/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/docs/grpc" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/docs/grpc?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/grpc" />
   </url>
   
   <!-- gRPC Postman Guide -->
