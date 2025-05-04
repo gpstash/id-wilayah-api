@@ -96,8 +96,8 @@ Protocol Buffer definitions are available in `src/proto/lokaid.proto` for genera
 Comprehensive documentation is available in both English and Indonesian:
 
 - [API Home](https://lokaid.gilangpratama.id)
-- [REST API Docs](https://lokaid.gilangpratama.id/docs/rest/)
-- [gRPC API Docs](https://lokaid.gilangpratama.id/docs/grpc/)
+- [REST API Docs](https://lokaid.gilangpratama.id/docs/rest)
+- [gRPC API Docs](https://lokaid.gilangpratama.id/docs/grpc)
 - [Postman Guide for gRPC](https://lokaid.gilangpratama.id/docs/grpc/postman.html)
 
 ## Data Structure
