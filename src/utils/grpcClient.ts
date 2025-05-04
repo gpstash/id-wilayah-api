@@ -288,7 +288,7 @@ export class GrpcClient {
     // Check for errors
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error('gRPC call failed with status ' + String(response.status) + ': ' + errorText);
+      throw new Error('gRPC call failed: ' + errorText);
     }
     
     // Parse the response
