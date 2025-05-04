@@ -87,7 +87,7 @@ vi.mock('../proto/generated/lokaid.js', () => {
   return {
     lokaid: {
       GetStateRequest: { 
-        decode: vi.fn().mockImplementation((buffer) => ({
+        decode: vi.fn().mockImplementation(() => ({
           toJSON: vi.fn().mockReturnValue({ state_code: '31' }),
         })),
         fromObject: vi.fn().mockReturnValue({}),
@@ -95,7 +95,7 @@ vi.mock('../proto/generated/lokaid.js', () => {
         encode: vi.fn().mockReturnValue({ finish: vi.fn().mockReturnValue(new Uint8Array(10)) }),
       },
       GetStateResponse: { 
-        decode: vi.fn().mockImplementation((buffer) => ({
+        decode: vi.fn().mockImplementation(() => ({
           toJSON: vi.fn().mockReturnValue({ state: { code: '31', value: 'DKI JAKARTA' } }),
         })),
         fromObject: vi.fn().mockReturnValue({}),
@@ -103,7 +103,7 @@ vi.mock('../proto/generated/lokaid.js', () => {
         encode: vi.fn().mockReturnValue({ finish: vi.fn().mockReturnValue(new Uint8Array(10)) }),
       },
       GetAllStatesRequest: { 
-        decode: vi.fn().mockImplementation((buffer) => ({
+        decode: vi.fn().mockImplementation(() => ({
           toJSON: vi.fn().mockReturnValue({}),
         })),
         fromObject: vi.fn().mockReturnValue({}),
@@ -111,7 +111,7 @@ vi.mock('../proto/generated/lokaid.js', () => {
         encode: vi.fn().mockReturnValue({ finish: vi.fn().mockReturnValue(new Uint8Array(10)) }),
       },
       GetAllStatesResponse: { 
-        decode: vi.fn().mockImplementation((buffer) => ({
+        decode: vi.fn().mockImplementation(() => ({
           toJSON: vi.fn().mockReturnValue({ states: [{ code: '31', value: 'DKI JAKARTA' }] }),
         })),
         fromObject: vi.fn().mockReturnValue({}),
@@ -119,7 +119,7 @@ vi.mock('../proto/generated/lokaid.js', () => {
         encode: vi.fn().mockReturnValue({ finish: vi.fn().mockReturnValue(new Uint8Array(10)) }),
       },
       HealthCheckRequest: { 
-        decode: vi.fn().mockImplementation((buffer) => ({
+        decode: vi.fn().mockImplementation(() => ({
           toJSON: vi.fn().mockReturnValue({}),
         })),
         fromObject: vi.fn().mockReturnValue({}),
@@ -127,7 +127,7 @@ vi.mock('../proto/generated/lokaid.js', () => {
         encode: vi.fn().mockReturnValue({ finish: vi.fn().mockReturnValue(new Uint8Array(10)) }),
       },
       HealthCheckResponse: { 
-        decode: vi.fn().mockImplementation((buffer) => ({
+        decode: vi.fn().mockImplementation(() => ({
           toJSON: vi.fn().mockReturnValue({
             status: 'OK',
             version: '1.0.0',
