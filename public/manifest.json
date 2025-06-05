@@ -1,7 +1,7 @@
 {
   "name": "LokaID - API Wilayah Indonesia",
   "short_name": "LokaID",
-  "description": "API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) tersedia dalam REST dan gRPC.",
+  "description": "API data wilayah administrasi Indonesia (provinsi, kota, kabupaten, kecamatan, desa) tersedia dalam REST.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

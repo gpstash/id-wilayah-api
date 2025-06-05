@@ -26,22 +26,3 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/rest" />
   </url>
   
-  <!-- gRPC API Documentation -->
-  <url>
-    <loc>https://lokaid.gilangpratama.id/docs/grpc</loc>
-    <lastmod>2025-05-01T00:00:00+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="id" href="https://lokaid.gilangpratama.id/docs/grpc" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://lokaid.gilangpratama.id/docs/grpc?lang=en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://lokaid.gilangpratama.id/docs/grpc" />
-  </url>
-  
-  <!-- gRPC Postman Guide -->
-  <url>
-    <loc>https://lokaid.gilangpratama.id/docs/grpc/postman.html</loc>
-    <lastmod>2025-05-01T00:00:00+07:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-</urlset> 
